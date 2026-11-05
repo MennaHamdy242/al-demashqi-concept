@@ -8,6 +8,8 @@ export const categories = [
     name: "Shawarma",
     nameAr: "شاورما",
     heroImage: "/images/hero/shawarma.webp",
+    imageWidth: 1024,
+    imageHeight: 683,
     note: null,
   },
   {
@@ -15,6 +17,8 @@ export const categories = [
     name: "Shawarma Meals",
     nameAr: "وجبات الشاورما",
     heroImage: "/images/hero/shawarma-meals.jpg",
+    imageWidth: 1200,
+    imageHeight: 1200,
     note: null,
   },
   {
@@ -22,6 +26,8 @@ export const categories = [
     name: "Chicken",
     nameAr: "فراخ",
     heroImage: "/images/hero/chicken.jpg",
+    imageWidth: 1200,
+    imageHeight: 800,
     note: "All meals include: rice + fries + garlic sauce + tahini + bread + pickles. Broasted comes with coleslaw instead of tahini.",
     noteAr: "جميع الوجبات تشمل: رز + بطاطس + تومية + طحينة + عيش + مخلل. البروستد: كلوسلو بدل الطحينة.",
   },
@@ -30,6 +36,8 @@ export const categories = [
     name: "Crepes",
     nameAr: "كريب",
     heroImage: "/images/hero/crepes.jpg",
+    imageWidth: 500,
+    imageHeight: 500,
     note: null,
   },
 ];

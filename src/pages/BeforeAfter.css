@@ -9,31 +9,44 @@
   line-height: 1.6;
 }
 
-.ba-page__tabs {
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-sm);
-  margin-block-end: var(--space-md);
+.ba-comparisons {
+  display: grid;
+  gap: var(--space-lg);
 }
 
-.ba-page__tab {
-  min-height: 44px;
-  padding-inline: var(--space-md);
-  border: 2px solid var(--color-maroon);
-  border-radius: 999px;
+.ba-comparison {
+  padding: var(--space-md);
+  border: 1px solid #e8dcc0;
+  border-radius: 12px;
   background: var(--color-white);
+  box-shadow: 0 2px 8px rgb(0 0 0 / 6%);
+}
+
+.ba-comparison h2 {
+  margin: 0 0 var(--space-sm);
   color: var(--color-maroon);
-  font: inherit;
+  font-size: 1.25rem;
+}
+
+.ba-comparison__description {
+  margin: 0 0 var(--space-md);
+  line-height: 1.7;
+}
+
+.ba-comparison__evidence {
+  margin: var(--space-sm) 0 0;
+  color: var(--color-maroon);
+  font-size: 0.9rem;
+}
+
+.ba-comparison__full-page {
+  display: inline-block;
+  margin-block-start: var(--space-sm);
+  color: var(--color-maroon);
   font-weight: 700;
-  cursor: pointer;
 }
 
-.ba-page__tab[aria-pressed="true"] {
-  background: var(--color-maroon);
-  color: var(--color-cream);
-}
-
-.ba-page__tab:focus-visible {
+.ba-comparison__full-page:focus-visible {
   outline: 3px solid var(--color-gold);
   outline-offset: 3px;
 }
@@ -112,6 +125,10 @@
 }
 
 @media (min-width: 700px) {
+  .ba-comparison {
+    padding: var(--space-md) var(--space-lg);
+  }
+
   .ba-page__problems {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }

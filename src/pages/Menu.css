@@ -11,15 +11,18 @@
 
 .menu-hero {
   position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+  background: #f3ead8;
 }
 
 .menu-hero img {
   display: block;
   width: 100%;
-  aspect-ratio: 16 / 7; /* النسبة دي بتخلي الطول يتناسب مع العرض دايمًا */
-  object-fit: cover;
-  object-position: center 30%; /* يفضل يركز على الجزء العلوي من الصورة غالبًا فيه الأكل */
-  border-radius: 12px;
+  height: auto;
+  max-height: 420px;
+  margin-inline: auto;
+  object-fit: contain;
 }
 
 .menu-hero-tag {
@@ -38,10 +41,28 @@
   color: var(--color-maroon);
 }
 
-.menu-category-title-en {
-  font-size: 0.8rem;
-  opacity: 0.6;
-  font-weight: 400;
+.menu-language-toggle {
+  min-height: 44px;
+  margin-block-end: var(--space-md);
+  padding-inline: var(--space-md);
+  border: 1px solid var(--color-maroon);
+  border-radius: 999px;
+  background: var(--color-white);
+  color: var(--color-maroon);
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.menu-language-toggle:hover,
+.menu-language-toggle[aria-pressed="true"] {
+  background: var(--color-maroon);
+  color: var(--color-white);
+}
+
+.menu-language-toggle:focus-visible {
+  outline: 3px solid var(--color-gold);
+  outline-offset: 2px;
 }
 
 .menu-note {

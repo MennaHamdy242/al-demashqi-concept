@@ -11,10 +11,18 @@ function Navbar() {
   return (
     <nav className="navbar">
       <div className="navbar-logo">
-        <img src="/images/logo.png" alt="مطعم الدمشقي" />
+        <img
+          src="/images/logo.png"
+          alt="مطعم الدمشقي"
+          width="336"
+          height="205"
+        />
       </div>
 
-      <ul className={`navbar-links ${isMenuOpen ? "open" : ""}`}>
+      <ul
+        id="primary-navigation"
+        className={`navbar-links ${isMenuOpen ? "open" : ""}`}
+      >
         <li>
           <Link
             to="/cart"
@@ -51,9 +59,12 @@ function Navbar() {
       </WhatsAppButton>
 
       <button
+        type="button"
         className="navbar-hamburger"
         onClick={() => setIsMenuOpen(!isMenuOpen)}
-        aria-label="فتح القائمة"
+        aria-label={isMenuOpen ? "إغلاق القائمة" : "فتح القائمة"}
+        aria-expanded={isMenuOpen}
+        aria-controls="primary-navigation"
       >
         ☰
       </button>

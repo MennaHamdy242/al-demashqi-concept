@@ -6,6 +6,7 @@ import "./Menu.css";
 
 function Menu() {
   const [selectedCategoryId, setSelectedCategoryId] = useState(categories[0].id);
+  const [showEnglishNames, setShowEnglishNames] = useState(false);
 
   const selectedCategory = categories.find(
     (category) => category.id === selectedCategoryId
@@ -29,14 +30,19 @@ function Menu() {
         <img
           src={selectedCategory.heroImage}
           alt={`صورة توضيحية: ${selectedCategory.nameAr}`}
+          width={selectedCategory.imageWidth}
+          height={selectedCategory.imageHeight}
+          fetchPriority="high"
         />
         <span className="menu-hero-tag">صورة توضيحية</span>
       </div>
 
       <h2 className="menu-category-title">
-        {selectedCategory.nameAr}{" "}
-        <span dir="ltr" className="menu-category-title-en">
-          {selectedCategory.name}
+        <span
+          dir={showEnglishNames ? "ltr" : "rtl"}
+          lang={showEnglishNames ? "en" : "ar"}
+        >
+          {showEnglishNames ? selectedCategory.name : selectedCategory.nameAr}
         </span>
       </h2>
 
@@ -44,9 +50,22 @@ function Menu() {
         <p className="menu-note">{selectedCategory.noteAr}</p>
       )}
 
+      <button
+        type="button"
+        className="menu-language-toggle"
+        aria-pressed={showEnglishNames}
+        onClick={() => setShowEnglishNames((isEnglish) => !isEnglish)}
+      >
+        {showEnglishNames ? "عرض الأسماء بالعربي" : "عرض الأسماء بالإنجليزي"}
+      </button>
+
       <div className="menu-grid">
         {visibleItems.map((item) => (
-          <MenuCard key={item.id} item={item} />
+          <MenuCard
+            key={item.id}
+            item={item}
+            showEnglishNames={showEnglishNames}
+          />
         ))}
       </div>
     </main>

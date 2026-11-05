@@ -42,6 +42,13 @@
   color: var(--color-maroon);
 }
 
+.navbar-links a:focus-visible,
+.navbar-cta:focus-visible,
+.navbar-hamburger:focus-visible {
+  outline: 3px solid var(--color-maroon);
+  outline-offset: 3px;
+}
+
 .navbar-cart-count {
   display: inline-grid;
   min-width: 24px;

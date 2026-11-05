@@ -6,6 +6,7 @@ function CategoryFilter({ categories, selectedId, onSelect }) {
       {categories.map((category) => (
         <button
           key={category.id}
+          type="button"
           className={`category-btn ${
             category.id === selectedId ? "active" : ""
           }`}

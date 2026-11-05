@@ -1,16 +1,18 @@
 import "./MenuCard.css";
 import useCart from "../hooks/useCart";
 
-function MenuCard({ item }) {
+function MenuCard({ item, showEnglishNames }) {
   const { addItem } = useCart();
 
   return (
     <article className="menu-card">
-      <h3 className="menu-card-name-ar">{item.nameAr}</h3>
-      {/* النص الإنجليزي ثانوي، وبنحط dir="ltr" عشان يتكتب صح جوا صفحة RTL */}
-      <p className="menu-card-name-en" dir="ltr">
-        {item.name}
-      </p>
+      <h3
+        className="menu-card-name"
+        dir={showEnglishNames ? "ltr" : "rtl"}
+        lang={showEnglishNames ? "en" : "ar"}
+      >
+        {showEnglishNames ? item.name : item.nameAr}
+      </h3>
 
       <ul className="menu-card-sizes">
         {item.sizes.map((size) => (
@@ -21,7 +23,11 @@ function MenuCard({ item }) {
               onClick={() => addItem(item, size)}
               aria-label={`أضف ${item.nameAr}${size.label ? `، ${size.label}` : ""} إلى السلة بسعر ${size.price} جنيه`}
             >
-              {size.label && <span className="size-label">{size.label}</span>}
+              {size.label && (
+                <span className="size-label" dir="ltr" lang="en">
+                  {size.label}
+                </span>
+              )}
               <span className="size-price" dir="ltr">
                 {size.price} جنيه
               </span>

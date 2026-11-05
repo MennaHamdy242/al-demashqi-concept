@@ -24,7 +24,7 @@ function Contact() {
 
       <section className="contact-card" aria-labelledby="message-title">
         <h2 id="message-title">واتساب</h2>
-        <p>ابدئي برسالة استفسار عن المنيو أو تابعي طلبك.</p>
+        <p>جهزي رسالة استفسار عن المنيو وراجعيها في واتساب قبل الإرسال.</p>
         <WhatsAppButton className="contact-whatsapp">
           افتحي واتساب
         </WhatsAppButton>

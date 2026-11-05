@@ -17,14 +17,30 @@ function BeforeAfterSlider({
       dir="ltr"
       style={{ aspectRatio, maxWidth }}
     >
-      <img className="ba-slider__img" src={beforeSrc} alt={beforeAlt} />
+      <img
+        className="ba-slider__img"
+        src={beforeSrc}
+        alt={beforeAlt}
+        width="1115"
+        height="607"
+        loading="lazy"
+        decoding="async"
+      />
 
       <div
         className="ba-slider__after"
         style={{ clipPath: `inset(0 0 0 ${position}%)` }}
       >
         {afterSrc ? (
-          <img className="ba-slider__img" src={afterSrc} alt={afterAlt} />
+          <img
+            className="ba-slider__img"
+            src={afterSrc}
+            alt={afterAlt}
+            width="1115"
+            height="607"
+            loading="lazy"
+            decoding="async"
+          />
         ) : (
           <div className="ba-slider__placeholder" aria-hidden="true">
             صورة التصميم الجديد هتتضاف بعد ما يستقر الشكل النهائي

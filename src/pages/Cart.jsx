@@ -42,7 +42,11 @@ function Cart() {
               <article className="cart-item" key={item.key}>
                 <div className="cart-item__details">
                   <h2>{item.nameAr}</h2>
-                  {item.sizeLabel && <p>{item.sizeLabel}</p>}
+                  {item.sizeLabel && (
+                    <p dir="ltr" lang="en">
+                      {item.sizeLabel}
+                    </p>
+                  )}
                   <p className="cart-item__unit-price">
                     {formatPrice(item.price)} للواحد
                   </p>

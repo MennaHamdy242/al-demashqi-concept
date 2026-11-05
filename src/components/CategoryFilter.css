@@ -21,6 +21,11 @@
   border-color: var(--color-maroon);
 }
 
+.category-btn:focus-visible {
+  outline: 3px solid var(--color-maroon);
+  outline-offset: 2px;
+}
+
 .category-btn.active {
   background-color: var(--color-maroon);
   border-color: var(--color-maroon);
