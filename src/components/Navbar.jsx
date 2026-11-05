@@ -1,17 +1,12 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import useCart from "../hooks/useCart";
+import WhatsAppButton from "./WhatsAppButton";
 import "./Navbar.css";
 
 function Navbar() {
   const { cartCount } = useCart();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  const whatsappNumber = "201000000000"; // TODO: استبدليه برقمك إنتي
-  const whatsappMessage = "مرحبا، أريد الاستفسار عن المنيو";
-  const whatsappLink = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(
-    whatsappMessage
-  )}`;
 
   return (
     <nav className="navbar">
@@ -51,14 +46,9 @@ function Navbar() {
         </li>
       </ul>
 
-      <a
-        href={whatsappLink}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="navbar-cta"
-      >
+      <WhatsAppButton className="navbar-cta">
         اطلب عبر واتساب
-      </a>
+      </WhatsAppButton>
 
       <button
         className="navbar-hamburger"

@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import useCart from "../hooks/useCart";
+import { buildOrderUrl } from "../utils/whatsapp";
 import "./Cart.css";
 
 function formatPrice(amount) {
@@ -9,6 +10,19 @@ function formatPrice(amount) {
 function Cart() {
   const { items, cartCount, changeQuantity, removeItem } = useCart();
   const total = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const formData = new FormData(event.currentTarget);
+    const orderUrl = buildOrderUrl({
+      items,
+      total,
+      customerName: formData.get("customerName"),
+      address: formData.get("address"),
+      notes: formData.get("notes"),
+    });
+    window.open(orderUrl, "_blank", "noopener,noreferrer");
+  };
 
   return (
     <main className="cart-page">
@@ -79,7 +93,7 @@ function Cart() {
               الإجمالي: <strong>{formatPrice(total)}</strong>
             </p>
 
-            <form className="checkout-form">
+            <form className="checkout-form" onSubmit={handleSubmit}>
               <label>
                 الاسم
                 <input name="customerName" autoComplete="name" required />
@@ -120,8 +134,11 @@ function Cart() {
                 </label>
               </fieldset>
 
-              <button type="button" className="checkout-submit" disabled>
-                إرسال الطلب عبر واتساب — بيتجهز في المرحلة التالية
+              <p className="checkout-hint">
+                هتتفتح رسالة جاهزة في واتساب لمراجعتها قبل الإرسال.
+              </p>
+              <button type="submit" className="checkout-submit">
+                مراجعة الطلب على واتساب
               </button>
             </form>
           </section>

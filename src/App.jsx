@@ -4,14 +4,8 @@ import Menu from "./pages/Menu";
 import BeforeAfter from "./pages/BeforeAfter";
 import { CartProvider } from "./context/CartContext";
 import Cart from "./pages/Cart";
-
-function Home() {
-  return <h1 style={{ padding: "40px" }}>الصفحة الرئيسية (قريبًا)</h1>;
-}
-
-function Contact() {
-  return <h1 style={{ padding: "40px" }}>صفحة التواصل (قريبًا)</h1>;
-}
+import Home from "./pages/Home";
+import Contact from "./pages/Contact";
 
 function App() {
   return (
