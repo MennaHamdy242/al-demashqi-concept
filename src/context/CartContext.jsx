@@ -68,13 +68,29 @@ function CartProvider({ children }) {
     });
   };
 
+  const changeQuantity = (key, difference) => {
+    setItems((currentItems) =>
+      currentItems
+        .map((item) =>
+          item.key === key
+            ? { ...item, quantity: item.quantity + difference }
+            : item
+        )
+        .filter((item) => item.quantity > 0)
+    );
+  };
+
+  const removeItem = (key) => {
+    setItems((currentItems) => currentItems.filter((item) => item.key !== key));
+  };
+
   const cartCount = useMemo(
     () => items.reduce((count, item) => count + item.quantity, 0),
     [items]
   );
 
   const value = useMemo(
-    () => ({ items, addItem, cartCount }),
+    () => ({ items, addItem, changeQuantity, removeItem, cartCount }),
     [items, cartCount]
   );
 
