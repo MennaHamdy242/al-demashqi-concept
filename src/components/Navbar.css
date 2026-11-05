@@ -42,9 +42,23 @@
   color: var(--color-maroon);
 }
 
+.navbar-cart-count {
+  display: inline-grid;
+  min-width: 24px;
+  min-height: 24px;
+  place-items: center;
+  margin-inline-start: 4px;
+  padding-inline: 6px;
+  border-radius: 999px;
+  background: var(--color-maroon);
+  color: var(--color-white);
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
 .navbar-cta {
   background-color: var(--color-gold);
-  color: var(--color-white);
+  color: var(--color-maroon);
   padding: 10px 20px;
   border-radius: 999px; /* شكل pill زي الريفرنس */
   text-decoration: none;
@@ -72,8 +86,7 @@
     display: none;
     position: absolute;
     top: 100%;
-    left: 0;
-    right: 0;
+    inset-inline: 0;
     flex-direction: column;
     background-color: var(--color-cream);
     padding: var(--space-md);

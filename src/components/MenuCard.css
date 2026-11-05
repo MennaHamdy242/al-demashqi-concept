@@ -33,11 +33,25 @@
   display: flex;
   gap: 6px;
   align-items: center;
+  min-height: 44px;
   background-color: var(--color-cream);
   border: 1px solid var(--color-gold);
   border-radius: 999px;
   padding: 6px 14px;
+  color: var(--color-text);
+  font: inherit;
   font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.size-pill:hover {
+  border-color: var(--color-maroon);
+  background-color: var(--color-white);
+}
+
+.size-pill:focus-visible {
+  outline: 3px solid var(--color-maroon);
+  outline-offset: 2px;
 }
 
 .size-price {

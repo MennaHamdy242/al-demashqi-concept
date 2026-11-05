@@ -2,6 +2,7 @@ import { Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import Menu from "./pages/Menu";
 import BeforeAfter from "./pages/BeforeAfter";
+import { CartProvider } from "./context/CartContext";
 
 function Home() {
   return <h1 style={{ padding: "40px" }}>الصفحة الرئيسية (قريبًا)</h1>;
@@ -13,7 +14,7 @@ function Contact() {
 
 function App() {
   return (
-    <>
+    <CartProvider>
       <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
@@ -21,7 +22,7 @@ function App() {
         <Route path="/menu" element={<Menu />} />
         <Route path="/contact" element={<Contact />} />
       </Routes>
-    </>
+    </CartProvider>
   );
 }
 
