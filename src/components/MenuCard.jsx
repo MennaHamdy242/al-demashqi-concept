@@ -21,10 +21,10 @@ function MenuCard({ item }) {
               onClick={() => addItem(item, size)}
               aria-label={`أضف ${item.nameAr}${size.label ? `، ${size.label}` : ""} إلى السلة بسعر ${size.price} جنيه`}
             >
-            {size.label && <span className="size-label">{size.label}</span>}
-            <span className="size-price" dir="ltr">
-              {size.price} جنيه
-            </span>
+              {size.label && <span className="size-label">{size.label}</span>}
+              <span className="size-price" dir="ltr">
+                {size.price} جنيه
+              </span>
             </button>
           </li>
         ))}

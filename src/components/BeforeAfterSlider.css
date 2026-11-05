@@ -38,7 +38,7 @@
 
 .ba-slider__label {
   position: absolute;
-  top: var(--space-sm);
+  inset-block-start: var(--space-sm);
   padding: 4px 12px;
   border-radius: 999px;
   background: var(--color-maroon);
@@ -63,8 +63,8 @@
 
 .ba-slider__knob {
   position: absolute;
-  top: 50%;
-  left: 50%;
+  inset-block-start: 50%;
+  inset-inline-start: 50%;
   display: grid;
   place-items: center;
   width: 44px;
