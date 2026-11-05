@@ -1,19 +1,22 @@
-import { useState } from 'react'
-import './BeforeAfterSlider.css'
+import { useState } from "react";
+import "./BeforeAfterSlider.css";
 
 function BeforeAfterSlider({
   beforeSrc,
   afterSrc,
   beforeAlt,
   afterAlt,
-  aspectRatio = '16 / 10',
-  maxWidth = '100%',
+  aspectRatio = "16 / 10",
+  maxWidth = "100%",
 }) {
-  const [position, setPosition] = useState(50)
+  const [position, setPosition] = useState(50);
 
   return (
-    // dir="ltr" هنا بس: المقارنة (قبل شمال / بعد يمين) لازم تفضل ثابتة حتى في صفحة RTL
-    <div className="ba-slider" dir="ltr" style={{ aspectRatio, maxWidth }}>
+    <div
+      className="ba-slider"
+      dir="ltr"
+      style={{ aspectRatio, maxWidth }}
+    >
       <img className="ba-slider__img" src={beforeSrc} alt={beforeAlt} />
 
       <div
@@ -23,8 +26,8 @@ function BeforeAfterSlider({
         {afterSrc ? (
           <img className="ba-slider__img" src={afterSrc} alt={afterAlt} />
         ) : (
-          <div className="ba-slider__placeholder">
-            صورة "بعد" هتتضاف في آخر المشروع
+          <div className="ba-slider__placeholder" aria-hidden="true">
+            صورة التصميم الجديد هتتضاف بعد ما يستقر الشكل النهائي
           </div>
         )}
       </div>
@@ -38,7 +41,7 @@ function BeforeAfterSlider({
         min="0"
         max="100"
         value={position}
-        onChange={(e) => setPosition(Number(e.target.value))}
+        onChange={(event) => setPosition(Number(event.target.value))}
         aria-label="اسحبي للمقارنة بين التصميم القديم والجديد"
         aria-valuetext={`${position}% من الصورة القديمة ظاهرة`}
       />
@@ -51,7 +54,7 @@ function BeforeAfterSlider({
         <span className="ba-slider__knob">⇄</span>
       </div>
     </div>
-  )
+  );
 }
 
-export default BeforeAfterSlider
+export default BeforeAfterSlider;

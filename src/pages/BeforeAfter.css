@@ -6,10 +6,12 @@
 
 .ba-page__intro {
   margin-block: var(--space-sm) var(--space-md);
+  line-height: 1.6;
 }
 
 .ba-page__tabs {
   display: flex;
+  flex-wrap: wrap;
   gap: var(--space-sm);
   margin-block-end: var(--space-md);
 }
@@ -26,13 +28,13 @@
   cursor: pointer;
 }
 
-.ba-page__tab[aria-pressed='true'] {
+.ba-page__tab[aria-pressed="true"] {
   background: var(--color-maroon);
   color: var(--color-cream);
 }
 
 .ba-page__tab:focus-visible {
-  outline: 3px solid var(--color-text);
+  outline: 3px solid var(--color-gold);
   outline-offset: 3px;
 }
 
@@ -56,6 +58,7 @@
 
 .ba-page__note {
   font-size: 0.9rem;
+  line-height: 1.6;
 }
 
 .ba-page__problems {
@@ -68,6 +71,7 @@
 
 .ba-problem {
   display: flex;
+  align-items: flex-start;
   gap: var(--space-md);
   padding: var(--space-md);
   border: 1px solid var(--color-maroon);
@@ -76,7 +80,7 @@
 }
 
 .ba-problem__num {
-  flex-shrink: 0;
+  flex: 0 0 36px;
   display: grid;
   place-items: center;
   width: 36px;
@@ -89,10 +93,12 @@
 
 .ba-problem h3 {
   margin: 0 0 4px;
+  color: var(--color-maroon);
 }
 
 .ba-problem p {
   margin: 0 0 var(--space-sm);
+  line-height: 1.6;
 }
 
 .ba-problem__evidence {
@@ -103,4 +109,10 @@
   color: var(--color-maroon);
   font-size: 0.85rem;
   font-weight: 700;
+}
+
+@media (min-width: 700px) {
+  .ba-page__problems {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
