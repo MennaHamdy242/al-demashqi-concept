@@ -1,0 +1,59 @@
+.menu-page {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: var(--space-lg) var(--space-md);
+}
+
+.menu-page h1 {
+  margin: 0;
+  color: var(--color-maroon);
+}
+
+.menu-hero {
+  position: relative;
+}
+
+.menu-hero img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 7; /* النسبة دي بتخلي الطول يتناسب مع العرض دايمًا */
+  object-fit: cover;
+  object-position: center 30%; /* يفضل يركز على الجزء العلوي من الصورة غالبًا فيه الأكل */
+  border-radius: 12px;
+}
+
+.menu-hero-tag {
+  position: absolute;
+  bottom: 10px;
+  left: 10px; /* اتغيرت من right لـ left عشان تبقى في الركن الصح جوا RTL */
+  background-color: rgba(0, 0, 0, 0.6);
+  color: var(--color-white);
+  font-size: 0.75rem;
+  padding: 4px 10px;
+  border-radius: 999px;
+}
+
+.menu-category-title {
+  margin: var(--space-lg) 0 var(--space-sm);
+  color: var(--color-maroon);
+}
+
+.menu-category-title-en {
+  font-size: 0.8rem;
+  opacity: 0.6;
+  font-weight: 400;
+}
+
+.menu-note {
+  background-color: var(--color-white);
+  border-right: 4px solid var(--color-gold); /* اتغيرت من border-left لـ border-right عشان RTL */
+  padding: var(--space-sm) var(--space-md);
+  margin: 0 0 var(--space-md);
+  font-size: 0.9rem;
+}
+
+.menu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: var(--space-md);
+}

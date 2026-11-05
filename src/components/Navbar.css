@@ -1,0 +1,90 @@
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-sm) var(--space-lg);
+  background-color: var(--color-cream);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+}
+
+.navbar-logo {
+  background-color: var(--color-maroon);
+  padding: 4px 8px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+}
+
+.navbar-logo img {
+  height: 50px;
+  width: auto;
+  display: block;
+}
+
+.navbar-links {
+  display: flex;
+  gap: var(--space-lg);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.navbar-links a {
+  text-decoration: none;
+  color: var(--color-text);
+  font-weight: 500;
+}
+
+.navbar-links a:hover {
+  color: var(--color-maroon);
+}
+
+.navbar-cta {
+  background-color: var(--color-gold);
+  color: var(--color-white);
+  padding: 10px 20px;
+  border-radius: 999px; /* شكل pill زي الريفرنس */
+  text-decoration: none;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.navbar-cta:hover {
+  opacity: 0.9;
+}
+
+.navbar-hamburger {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  min-width: 44px;
+  min-height: 44px;
+}
+
+/* Mobile view */
+@media (max-width: 768px) {
+  .navbar-links {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    background-color: var(--color-cream);
+    padding: var(--space-md);
+    gap: var(--space-md);
+  }
+
+  .navbar-links.open {
+    display: flex;
+  }
+
+  .navbar-hamburger {
+    display: block;
+  }
+}

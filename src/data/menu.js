@@ -1,13 +1,13 @@
 // src/data/menu.js
-// All prices and item names copied from eldemashqi.com
-// This is a concept redesign demo — not the real restaurant site
+// All item names and prices copied from eldemashqi.com
+// This is a concept redesign demo — not the official restaurant site
 
 export const categories = [
   {
     id: "shawarma",
     name: "Shawarma",
     nameAr: "شاورما",
-    heroImage: "/images/hero/shawarma.jpg",
+    heroImage: "/images/hero/shawarma.webp",
     note: null,
   },
   {
@@ -23,6 +23,7 @@ export const categories = [
     nameAr: "فراخ",
     heroImage: "/images/hero/chicken.jpg",
     note: "All meals include: rice + fries + garlic sauce + tahini + bread + pickles. Broasted comes with coleslaw instead of tahini.",
+    noteAr: "جميع الوجبات تشمل: رز + بطاطس + تومية + طحينة + عيش + مخلل. البروستد: كلوسلو بدل الطحينة.",
   },
   {
     id: "crepes",
