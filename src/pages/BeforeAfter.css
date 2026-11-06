@@ -1,13 +1,26 @@
 .ba-page {
   max-width: 1180px;
   margin-inline: auto;
-  padding: clamp(28px, 5vw, 56px) clamp(16px, 4vw, 40px);
+  padding: var(--page-padding-block) var(--page-padding-inline);
 }
 
 .ba-page__heading {
   max-width: 760px;
   margin-block-end: 26px;
 }
+
+.ba-problem-list { margin-block-end: 24px; padding: 18px 22px; border: 1px solid rgb(81 6 13 / 12%); border-radius: 16px; background: var(--color-white); }
+.ba-problem-list h2 { margin: 0 0 12px; color: var(--color-maroon); font-size: 1.2rem; }
+.ba-problem-list ol { display: grid; gap: 8px; margin: 0; padding-inline-start: 24px; }
+.ba-problem-list a { display: grid; gap: 3px; padding: 8px; color: var(--color-maroon); text-decoration: none; }
+.ba-problem-list a:hover { text-decoration: underline; text-underline-offset: 3px; }
+.ba-problem-list a span { color: #55483e; font-size: .9rem; }
+.ba-mobile-pair { margin-block-start: 18px; }
+.ba-mobile-pair h3 { color: var(--color-maroon); font-size: 1rem; }
+.lighthouse-section { margin-block-start: 24px; overflow-x: auto; }
+.lighthouse-section table { width: 100%; border-collapse: collapse; background: var(--color-white); }
+.lighthouse-section caption { padding: 8px; font-weight: 700; }
+.lighthouse-section th, .lighthouse-section td { padding: 10px; border: 1px solid rgb(81 6 13 / 18%); text-align: start; }
 
 .ba-eyebrow {
   margin: 0 0 6px;
@@ -35,7 +48,7 @@
 }
 
 .ba-comparison {
-  padding: clamp(16px, 3vw, 28px);
+  padding: var(--space-md);
   border: 1px solid rgb(81 6 13 / 12%);
   border-radius: 20px;
   background: var(--color-white);
@@ -96,25 +109,6 @@
 }
 
 .ba-comparison__full-page:focus-visible {
-  outline: 3px solid var(--color-gold);
+  outline: 3px solid var(--color-maroon);
   outline-offset: 3px;
-}
-
-.ba-page__note {
-  margin-block-start: 28px;
-  padding: 18px 20px;
-  border-inline-start: 4px solid var(--color-gold);
-  border-radius: 12px;
-  background: var(--color-white);
-  color: #55483e;
-  font-size: 0.92rem;
-  line-height: 1.7;
-}
-
-.ba-page__note strong {
-  color: var(--color-maroon);
-}
-
-.ba-page__note p {
-  margin: 6px 0 0;
 }

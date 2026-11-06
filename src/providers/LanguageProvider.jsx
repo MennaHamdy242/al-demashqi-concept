@@ -17,11 +17,6 @@ function LanguageProvider({ children }) {
   useEffect(() => {
     document.documentElement.lang = language;
     document.documentElement.dir = language === "ar" ? "rtl" : "ltr";
-    document.title =
-      language === "ar"
-        ? "الدمشقي | قائمة الطعام والطلبات"
-        : "Al Demashqi | Menu & Ordering";
-
     const description = document.querySelector('meta[name="description"]');
     if (description) {
       description.content =

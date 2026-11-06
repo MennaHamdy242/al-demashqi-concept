@@ -1,120 +1,81 @@
 import { problems } from "../data/problems";
-import { translations } from "../data/translations";
+import { interpolate, translations } from "../data/translations";
 import BeforeAfterSlider from "../components/BeforeAfterSlider";
 import useLanguage from "../hooks/useLanguage";
 import "./BeforeAfter.css";
+import usePageTitle from "../hooks/usePageTitle";
+import LighthouseTable from "../components/LighthouseTable";
 
-const comparisonSources = [
-  {
-    problemId: 1,
-    beforeSrc: "/images/before-after/first-page-mobile.png",
-    afterSrc: "/images/before-after/new-menu.png",
-    aspectRatio: "4 / 5",
-  },
-  {
-    problemId: 2,
-    beforeSrc: "/images/before-after/first-page.png",
-    afterSrc: "/images/before-after/new-menu.png",
-    aspectRatio: "16 / 9",
-    supportingEvidence: "/images/before-after/first-page-mobile.png",
-  },
-  {
-    problemId: 3,
-    beforeSrc: "/images/before-after/middle-page.png",
-    afterSrc: "/images/before-after/new-menu.png",
-    aspectRatio: "16 / 9",
-    fullPageEvidence: "/images/before-after/full-site.png",
-  },
+const comparisons = [
+  { id: 1, before: "/images/before-after/last-page.png", after: "/images/before-after/new-menu.png" },
+  { id: 2, before: "/images/before-after/first-page.png", after: "/images/before-after/new-navbar.png" },
+  { id: 3, before: "/images/before-after/middle-page.png", after: "/images/before-after/new-menu-card.png" },
 ];
 
-const comparisons = comparisonSources.map((source) => ({
-  ...source,
-  problem: problems.find((problem) => problem.id === source.problemId),
-}));
 function BeforeAfter() {
   const { language } = useLanguage();
   const t = translations[language].beforeAfter;
-  const isArabic = language === "ar";
+  usePageTitle("beforeAfter");
+  const intro = interpolate(t.intro, { count: problems.length.toLocaleString(language === "ar" ? "ar-EG" : "en-EG") });
 
   return (
     <main className="ba-page">
       <header className="ba-page__heading">
-        <p className="ba-eyebrow">{isArabic ? "من تجربة العميل" : "Customer experience"}</p>
         <h1>{t.title}</h1>
-        <p className="ba-page__intro">{t.intro}</p>
+        <p className="ba-page__intro">{intro}</p>
       </header>
-
+      <section className="ba-problem-list" aria-labelledby="ba-problems-title">
+        <h2 id="ba-problems-title">{t.problemsHeading}</h2>
+        <ol>
+          {problems.map((problem) => (
+            <li key={problem.id}>
+              <a href={`#comparison-${problem.id}`}>
+                <strong>{language === "ar" ? problem.title : problem.titleEn}</strong>
+                <span>{language === "ar" ? problem.evidence : problem.evidenceEn}</span>
+              </a>
+            </li>
+          ))}
+        </ol>
+      </section>
       <div className="ba-comparisons">
         {comparisons.map((comparison, index) => {
-          const title = isArabic
-            ? comparison.problem.title
-            : comparison.problem.titleEn;
-          const description = isArabic
-            ? comparison.problem.description
-            : comparison.problem.descriptionEn;
-          const evidence = isArabic
-            ? comparison.problem.evidence
-            : comparison.problem.evidenceEn;
-
+          const problem = problems.find((entry) => entry.id === comparison.id);
+          const title = language === "ar" ? problem.title : problem.titleEn;
+          const description = language === "ar" ? problem.description : problem.descriptionEn;
+          const evidence = language === "ar" ? problem.evidence : problem.evidenceEn;
           return (
-            <section
-              key={comparison.problemId}
-              className="ba-comparison"
-              aria-labelledby={`comparison-${comparison.problemId}`}
-            >
+            <section key={problem.id} id={`comparison-${problem.id}`} className="ba-comparison" aria-labelledby={`heading-${problem.id}`}>
               <div className="ba-comparison__copy">
-                <span className="ba-comparison__number">
-                  {String(index + 1).padStart(2, "0")}
-                </span>
-                <div>
-                  <h2 id={`comparison-${comparison.problemId}`}>{title}</h2>
-                  <p className="ba-comparison__description">{description}</p>
-                </div>
+                <span className="ba-comparison__number">{String(index + 1).padStart(2, "0")}</span>
+                <div><h2 id={`heading-${problem.id}`}>{title}</h2><p className="ba-comparison__description">{description}</p></div>
               </div>
               <BeforeAfterSlider
-                beforeSrc={comparison.beforeSrc}
-                afterSrc={comparison.afterSrc}
-                beforeAlt={`${t.oldImage}: ${title}`}
-                afterAlt={`${t.newImage}: ${title}`}
-                beforeLabel={t.oldImage}
-                afterLabel={t.newImage}
-                sliderLabel={t.sliderLabel}
-                sliderValue={t.sliderValue}
-                placeholderText={t.sliderPlaceholder}
-                aspectRatio={comparison.aspectRatio}
+                beforeSrc={comparison.before} afterSrc={comparison.after}
+                beforeAlt={`${t.oldImage}: ${title}`} afterAlt={`${t.newImage}: ${title}`}
+                beforeLabel={t.oldImage} afterLabel={t.newImage}
+                sliderLabel={t.sliderLabel} sliderValue={t.sliderValue}
+                aspectRatio="16 / 9" maxWidth="820px"
               />
-              <p className="ba-comparison__evidence">
-                <strong>{t.evidence}:</strong> {evidence}
-              </p>
-              {comparison.supportingEvidence && (
-                <a
-                  className="ba-comparison__full-page"
-                  href={comparison.supportingEvidence}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {t.mobileEvidence}
-                </a>
-              )}
-              {comparison.fullPageEvidence && (
-                <a
-                  className="ba-comparison__full-page"
-                  href={comparison.fullPageEvidence}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {t.fullPage}
-                </a>
+              <p className="ba-comparison__evidence"><strong>{t.evidence}:</strong> {evidence}</p>
+              {problem.id === 2 && (
+                <div className="ba-mobile-pair">
+                  <h3>{t.mobileEvidence}</h3>
+                  <BeforeAfterSlider
+                    beforeSrc="/images/before-after/first-page-mobile.png"
+                    afterSrc="/images/before-after/new-navbar-mobile.png"
+                    beforeAlt={`${t.oldImage}: ${title} mobile screenshot`}
+                    afterAlt={`${t.newImage}: ${title} mobile screenshot`}
+                    beforeLabel={t.oldImage} afterLabel={t.newImage}
+                    sliderLabel={t.sliderLabel} sliderValue={t.sliderValue}
+                    aspectRatio="390 / 844" maxWidth="390px"
+                  />
+                </div>
               )}
             </section>
           );
         })}
       </div>
-
-      <aside className="ba-page__note" aria-label={t.lighthouseTitle}>
-        <strong>{t.lighthouseTitle}</strong>
-        <p>{t.lighthouseNote}</p>
-      </aside>
+      <LighthouseTable />
     </main>
   );
 }

@@ -43,7 +43,7 @@
   border-radius: 999px;
   background: var(--color-maroon);
   color: var(--color-cream);
-  font-size: 0.875rem;
+  font-size: 0.75rem;
   font-weight: 700;
   pointer-events: none;
 }

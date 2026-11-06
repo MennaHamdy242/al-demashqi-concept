@@ -1,3 +1,4 @@
+import { useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import useCart from "../hooks/useCart";
 import useLanguage from "../hooks/useLanguage";
@@ -5,21 +6,34 @@ import { buildOrderUrl } from "../utils/whatsapp";
 import { getSizeLabel, translations } from "../data/translations";
 import { formatPrice } from "../utils/formatters";
 import "./Cart.css";
+import usePageTitle from "../hooks/usePageTitle";
 
 function Cart() {
   const { items, cartCount, changeQuantity, removeItem } = useCart();
   const { language } = useLanguage();
   const t = translations[language].cart;
+  usePageTitle("cart");
+  const [errors, setErrors] = useState({});
+  const nameRef = useRef(null);
+  const addressRef = useRef(null);
   const total = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
   const handleSubmit = (event) => {
     event.preventDefault();
     const formData = new FormData(event.currentTarget);
+    const customerName = String(formData.get("customerName") || "").trim();
+    const address = String(formData.get("address") || "").trim();
+    const nextErrors = { customerName: !customerName, address: !address };
+    setErrors(nextErrors);
+    if (nextErrors.customerName || nextErrors.address) {
+      (nextErrors.customerName ? nameRef : addressRef).current?.focus();
+      return;
+    }
     const orderUrl = buildOrderUrl({
       items,
       total,
-      customerName: formData.get("customerName"),
-      address: formData.get("address"),
+      customerName,
+      address,
       notes: formData.get("notes"),
       language,
     });
@@ -109,19 +123,26 @@ function Cart() {
               {t.total}: <strong>{formatPrice(total, language)}</strong>
             </p>
 
-            <form className="checkout-form" onSubmit={handleSubmit}>
+            <form className="checkout-form" noValidate onSubmit={handleSubmit}>
               <label>
                 {t.name}
-                <input name="customerName" autoComplete="name" required />
+                <input ref={nameRef} id="customer-name" name="customerName" autoComplete="name" required aria-invalid={errors.customerName ? "true" : undefined} aria-describedby={errors.customerName ? "customer-name-error" : undefined} onChange={() => setErrors((current) => ({ ...current, customerName: false }))} />
+                {errors.customerName && <span className="field-error" id="customer-name-error" role="alert">! {t.nameRequired}</span>}
               </label>
               <label>
                 {t.address}
                 <textarea
+                  ref={addressRef}
+                  id="delivery-address"
                   name="address"
                   autoComplete="street-address"
                   rows="3"
                   required
+                  aria-invalid={errors.address ? "true" : undefined}
+                  aria-describedby={errors.address ? "delivery-address-error" : undefined}
+                  onChange={() => setErrors((current) => ({ ...current, address: false }))}
                 />
+                {errors.address && <span className="field-error" id="delivery-address-error" role="alert">! {t.addressRequired}</span>}
               </label>
               <label>
                 {t.notes} <span>({t.optional})</span>

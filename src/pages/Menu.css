@@ -1,7 +1,7 @@
 .menu-page {
   max-width: 1240px;
   margin-inline: auto;
-  padding: clamp(24px, 4vw, 48px) clamp(16px, 4vw, 40px);
+  padding: var(--page-padding-block) var(--page-padding-inline);
 }
 
 .menu-page__heading {
@@ -80,44 +80,39 @@
 }
 
 .menu-category-intro {
-  margin-block: 22px;
+  margin-block-end: 18px;
 }
+
+.menu-groups {
+  display: grid;
+  gap: 28px;
+}
+
+.menu-add-hint { margin: 0 0 12px; color: #55483e; font-size: .92rem; }
 
 .menu-hero {
   position: relative;
-  display: grid;
-  min-height: 240px;
-  max-height: 420px;
-  place-items: center;
+  width: 100%;
+  margin-inline: auto;
   overflow: hidden;
-  border: 1px solid rgb(81 6 13 / 10%);
+  padding: 8px;
+  border: 1px solid rgb(201 162 39 / 62%);
   border-radius: 20px;
-  background: #efe5d4;
+  background: #f0e8da;
+  box-shadow: 0 8px 22px rgb(81 6 13 / 8%);
 }
 
 .menu-hero img {
   display: block;
   width: 100%;
-  height: auto;
-  max-height: 420px;
-  object-fit: contain;
-}
-
-.menu-hero-tag {
-  position: absolute;
-  inset-block-end: 12px;
-  inset-inline-start: 12px;
-  padding: 6px 11px;
-  border: 1px solid rgb(255 255 255 / 20%);
-  border-radius: 999px;
-  background: var(--color-maroon);
-  color: var(--color-white);
-  font-size: 0.76rem;
-  font-weight: 700;
+  height: 100%;
+  border-radius: 12px;
+  object-fit: cover;
+  object-position: center;
 }
 
 .menu-category-title {
-  margin: 22px 0 10px;
+  margin: 18px 0 10px;
   color: var(--color-maroon);
   font-size: 1.55rem;
 }
@@ -174,10 +169,6 @@
   .menu-search button {
     padding-inline: 9px;
     font-size: 0.85rem;
-  }
-
-  .menu-hero {
-    min-height: 200px;
   }
 
   .menu-grid {

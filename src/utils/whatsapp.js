@@ -14,6 +14,7 @@ function buildOrderMessage({
   const numberLocale = language === "ar" ? "ar-EG" : "en-EG";
   const lines = [
     t.orderTitle,
+    t.demoNotice,
     "",
     t.items,
     ...items.map((item) => {

@@ -1,11 +1,13 @@
 import { Link } from "react-router-dom";
 import useLanguage from "../hooks/useLanguage";
 import { translations } from "../data/translations";
+import usePageTitle from "../hooks/usePageTitle";
 import "./Home.css";
 
 function Home() {
   const { language } = useLanguage();
   const t = translations[language].home;
+  usePageTitle("home");
 
   return (
     <main className="home-page">
@@ -26,7 +28,7 @@ function Home() {
         <img
           className="home-hero__image"
           src="/images/hero/shawarma.webp"
-          alt={language === "ar" ? "صورة توضيحية لوجبة شاورما" : "Illustrative shawarma meal"}
+          alt={translations[language].menu.heroImageAlt}
           width="1024"
           height="683"
           fetchPriority="high"

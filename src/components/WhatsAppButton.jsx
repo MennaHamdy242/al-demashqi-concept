@@ -10,9 +10,7 @@ function WhatsAppButton({
   const { language } = useLanguage();
   const greeting =
     message ??
-    (language === "ar"
-      ? translations.ar.whatsapp.greeting
-      : translations.en.whatsapp.greeting);
+    `${translations[language].whatsapp.greeting} ${translations[language].whatsapp.demoNotice}`;
 
   return (
     <a
@@ -21,7 +19,7 @@ function WhatsAppButton({
       rel="noopener noreferrer"
       className={className}
     >
-      {children ?? (language === "ar" ? "تواصل عبر واتساب" : "Contact on WhatsApp")}
+      {children ?? translations[language].menu.whatsappFallback}
     </a>
   );
 }

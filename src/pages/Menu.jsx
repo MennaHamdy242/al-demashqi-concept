@@ -1,38 +1,45 @@
-import { useMemo, useState } from "react";
+import { useState } from "react";
 import { categories, menuItems } from "../data/menu";
 import { interpolate, translations } from "../data/translations";
 import CategoryFilter from "../components/CategoryFilter";
 import MenuCard from "../components/MenuCard";
 import useLanguage from "../hooks/useLanguage";
+import { normalizeArabic } from "../utils/normalizeArabic";
+import usePageTitle from "../hooks/usePageTitle";
 import "./Menu.css";
 
 const allCategory = { id: "all", name: "All items", nameAr: "كل الأصناف" };
 const categoriesById = new Map(
   categories.map((category) => [category.id, category])
 );
+const filters = [allCategory, ...categories];
 
 function Menu() {
   const [selectedCategoryId, setSelectedCategoryId] = useState("all");
   const [query, setQuery] = useState("");
   const { language } = useLanguage();
   const t = translations[language].menu;
-  const filters = useMemo(() => [allCategory, ...categories], []);
-
+  usePageTitle("menu");
   const visibleItems = menuItems.filter((item) => {
     const category = categoriesById.get(item.categoryId);
     const matchesCategory =
       selectedCategoryId === "all" || item.categoryId === selectedCategoryId;
-    const searchText = [item.name, item.nameAr, category?.name, category?.nameAr]
-      .join(" ")
-      .toLocaleLowerCase(language);
+    const searchText = normalizeArabic([item.name, item.nameAr, category?.name, category?.nameAr].join(" ").toLocaleLowerCase(language));
     const matchesQuery = searchText.includes(
-      query.trim().toLocaleLowerCase(language)
+      normalizeArabic(query.trim().toLocaleLowerCase(language))
     );
 
     return matchesCategory && matchesQuery;
   });
 
   const selectedCategory = categoriesById.get(selectedCategoryId);
+  const visibleGroups = (selectedCategory ? [selectedCategory] : categories)
+    .map((category) => ({
+      category,
+      items: visibleItems.filter((item) => item.categoryId === category.id),
+    }))
+    .filter((group) => group.items.length > 0);
+  const firstVisibleCategoryId = visibleGroups[0]?.category.id;
   const resultCount = new Intl.NumberFormat(
     language === "ar" ? "ar-EG" : "en-EG"
   ).format(visibleItems.length);
@@ -42,9 +49,7 @@ function Menu() {
       <div className="menu-page__heading">
         <div>
           <p className="menu-eyebrow">
-            {language === "ar"
-              ? "الدمشقي · العاشر من رمضان"
-              : "Al Demashqi · 10th of Ramadan City"}
+            {t.eyebrow}
           </p>
           <h1>{t.title}</h1>
         </div>
@@ -73,57 +78,61 @@ function Menu() {
         selectedId={selectedCategoryId}
         onSelect={setSelectedCategoryId}
       />
-
-      {selectedCategory && (
-        <section
-          className="menu-category-intro"
-          aria-labelledby="menu-category-title"
-        >
-          <div className="menu-hero">
-            <img
-              src={selectedCategory.heroImage}
-              alt={`${t.illustration}: ${language === "ar" ? selectedCategory.nameAr : selectedCategory.name}`}
-              width={selectedCategory.imageWidth}
-              height={selectedCategory.imageHeight}
-              fetchPriority="high"
-            />
-            <span className="menu-hero-tag">{t.illustration}</span>
-          </div>
-
-          <h2 id="menu-category-title" className="menu-category-title">
-            {language === "ar" ? selectedCategory.nameAr : selectedCategory.name}
-          </h2>
-
-          {selectedCategory.note && (
-            <p className="menu-note">
-              {language === "ar"
-                ? selectedCategory.noteAr
-                : selectedCategory.note}
-            </p>
-          )}
-        </section>
-      )}
+      <p className="menu-add-hint">{t.addHint}</p>
 
       {visibleItems.length > 0 ? (
-        <div className="menu-grid">
-          {visibleItems.map((item) => {
-            const category = categoriesById.get(item.categoryId);
-            const categoryName =
-              selectedCategoryId === "all"
-                ? language === "ar"
-                  ? category.nameAr
-                  : category.name
-                : null;
+        <div className="menu-groups">
+          {visibleGroups.map(({ category, items }) => (
+            <section
+              className="menu-category-section"
+              key={category.id}
+              aria-labelledby={`menu-category-${category.id}`}
+            >
+              <div className="menu-category-intro">
+                <div
+                  className="menu-hero"
+                  style={{
+                    aspectRatio: `${category.imageWidth} / ${category.imageHeight}`,
+                    maxWidth: `${Math.min(
+                      720,
+                      Math.round(
+                        (440 * category.imageWidth) / category.imageHeight
+                      )
+                    )}px`,
+                  }}
+                >
+                  <img
+                    src={category.heroImage}
+                    alt={language === "ar" ? category.nameAr : category.name}
+                    width={category.imageWidth}
+                    height={category.imageHeight}
+                    fetchPriority={category.id === firstVisibleCategoryId ? "high" : "auto"}
+                    loading={category.id === firstVisibleCategoryId ? "eager" : "lazy"}
+                    decoding="async"
+                  />
+                </div>
 
-            return (
-              <MenuCard
-                key={item.id}
-                item={item}
-                categoryName={categoryName}
-                category={category}
-              />
-            );
-          })}
+                <h2
+                  id={`menu-category-${category.id}`}
+                  className="menu-category-title"
+                >
+                  {language === "ar" ? category.nameAr : category.name}
+                </h2>
+
+                {category.note && (
+                  <p className="menu-note">
+                    {language === "ar" ? category.noteAr : category.note}
+                  </p>
+                )}
+              </div>
+
+              <div className="menu-grid">
+                {items.map((item) => (
+                  <MenuCard key={item.id} item={item} />
+                ))}
+              </div>
+            </section>
+          ))}
         </div>
       ) : (
         <section className="menu-empty" aria-live="polite">

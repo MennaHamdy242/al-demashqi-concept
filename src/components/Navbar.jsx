@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, NavLink, useLocation } from "react-router-dom";
+import { useEffect, useRef, useState } from "react";
 import useCart from "../hooks/useCart";
 import useLanguage from "../hooks/useLanguage";
 import { translations } from "../data/translations";
@@ -10,13 +10,28 @@ function Navbar() {
   const { cartCount } = useCart();
   const { language, toggleLanguage } = useLanguage();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const menuButtonRef = useRef(null);
+  const location = useLocation();
   const t = translations[language].nav;
 
   const closeMenu = () => setIsMenuOpen(false);
 
+  useEffect(() => { setIsMenuOpen(false); }, [location.pathname]);
+  useEffect(() => {
+    if (!isMenuOpen) return undefined;
+    const onKeyDown = (event) => {
+      if (event.key === "Escape") {
+        setIsMenuOpen(false);
+        menuButtonRef.current?.focus();
+      }
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [isMenuOpen]);
+
   return (
     <header className="site-header">
-      <nav className="navbar" aria-label={language === "ar" ? "التنقل الرئيسي" : "Main navigation"}>
+      <nav className="navbar" aria-label={t.mainNavigation}>
         <Link to="/" className="navbar-brand" onClick={closeMenu}>
           <span className="navbar-logo">
             <img
@@ -27,8 +42,9 @@ function Navbar() {
             />
           </span>
           <span className="navbar-brand-copy">
-            <strong>الدمشقي</strong>
+            <strong lang="ar">الدمشقي</strong>
             <span>{translations[language].brandTagline}</span>
+            <small className="navbar-concept-badge">{translations[language].beforeAfter.conceptBadge}</small>
           </span>
         </Link>
 
@@ -37,44 +53,32 @@ function Navbar() {
           className={`navbar-links ${isMenuOpen ? "open" : ""}`}
         >
           <li>
-            <Link to="/" onClick={closeMenu}>
+            <NavLink to="/" end onClick={closeMenu}>
               {t.home}
-            </Link>
+            </NavLink>
           </li>
           <li>
-            <Link to="/before-after" onClick={closeMenu}>
+            <NavLink to="/before-after" onClick={closeMenu}>
               {t.beforeAfter}
-            </Link>
+            </NavLink>
           </li>
           <li>
-            <Link to="/menu" onClick={closeMenu}>
+            <NavLink to="/menu" onClick={closeMenu}>
               {t.menu}
-            </Link>
+            </NavLink>
           </li>
           <li>
-            <Link to="/contact" onClick={closeMenu}>
+            <NavLink to="/contact" onClick={closeMenu}>
               {t.contact}
-            </Link>
-          </li>
-          <li>
-            <Link
-              to="/cart"
-              onClick={closeMenu}
-              aria-label={`${t.cart} (${new Intl.NumberFormat(
-                  language === "ar" ? "ar-EG" : "en-EG"
-                ).format(cartCount)})`}
-            >
-              {t.cart}
-              <span className="navbar-cart-count" aria-hidden="true">
-                {new Intl.NumberFormat(
-                  language === "ar" ? "ar-EG" : "en-EG"
-                ).format(cartCount)}
-              </span>
-            </Link>
+            </NavLink>
           </li>
         </ul>
 
         <div className="navbar-actions">
+          <NavLink to="/cart" className="navbar-cart-link" aria-label={`${t.cart} (${cartCount})`} onClick={closeMenu}>
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 4h2l2.2 11.1a2 2 0 0 0 2 1.6h8.3a2 2 0 0 0 1.9-1.4L21 9H7" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/><circle cx="10" cy="20" r="1.5" fill="currentColor"/><circle cx="18" cy="20" r="1.5" fill="currentColor"/></svg>
+            <span className="navbar-cart-count" aria-hidden="true">{cartCount.toLocaleString(language === "ar" ? "ar-EG" : "en-EG")}</span>
+          </NavLink>
           <WhatsAppButton className="navbar-cta">
             <span className="navbar-cta-icon" aria-hidden="true">
               <svg viewBox="0 0 24 24" focusable="false">
@@ -91,12 +95,13 @@ function Navbar() {
             aria-label={t.switchLanguage}
             title={t.switchLanguage}
           >
-            <span aria-hidden="true">{language === "ar" ? "EN" : "ع"}</span>
+            <span aria-hidden="true">{t.switchToShort}</span>
           </button>
 
           <button
             type="button"
             className="navbar-hamburger"
+            ref={menuButtonRef}
             onClick={() => setIsMenuOpen((isOpen) => !isOpen)}
             aria-label={isMenuOpen ? t.closeMenu : t.openMenu}
             aria-expanded={isMenuOpen}

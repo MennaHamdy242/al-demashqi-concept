@@ -22,12 +22,11 @@ function BeforeAfterSlider({
       dir="ltr"
       style={{ aspectRatio, maxWidth }}
     >
+      {/* clip-path and the handle use physical left/right, so the slider must stay LTR even on an RTL page. */}
       <img
         className="ba-slider__img"
         src={beforeSrc}
         alt={beforeAlt}
-        width="1115"
-        height="607"
         loading="lazy"
         decoding="async"
       />
@@ -41,8 +40,6 @@ function BeforeAfterSlider({
             className="ba-slider__img"
             src={afterSrc}
             alt={afterAlt}
-            width="1115"
-            height="607"
             loading="lazy"
             decoding="async"
           />
@@ -67,6 +64,18 @@ function BeforeAfterSlider({
         max="100"
         value={position}
         onChange={(event) => setPosition(Number(event.target.value))}
+        onKeyDown={(event) => {
+          const step = event.shiftKey ? 10 : 0;
+          let next = position;
+          if (event.key === "PageUp") next = position + 10;
+          if (event.key === "PageDown") next = position - 10;
+          if (event.shiftKey && event.key === "ArrowRight") next = position + step;
+          if (event.shiftKey && event.key === "ArrowLeft") next = position - step;
+          if (next !== position) {
+            event.preventDefault();
+            setPosition(Math.min(100, Math.max(0, next)));
+          }
+        }}
         aria-label={sliderLabel}
         aria-valuetext={sliderValue.replace("{percent}", position)}
       />

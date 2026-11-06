@@ -1,5 +1,8 @@
 const translations = {
   ar: {
+    lighthouse: { title: "مقارنة Lighthouse", caption: "نتائج Lighthouse قبل وبعد", metric: "المعيار", old: "السابق", new: "الحالي", device: "الجهاز", sameDeviceNote: "يستخدم القياسان الجهاز ووضع Lighthouse نفسيهما.", metrics: { performance: "الأداء", accessibility: "إمكانية الوصول", bestPractices: "أفضل الممارسات", seo: "تهيئة محركات البحث" } },
+    notFound: { title: "الصفحة غير موجودة", text: "تعذّر العثور على الصفحة المطلوبة.", home: "العودة إلى الرئيسية" },
+    pageTitles: { home: "الرئيسية | الدمشقي، تصميم مفاهيمي", menu: "القائمة | الدمشقي، تصميم مفاهيمي", cart: "السلة | الدمشقي، تصميم مفاهيمي", contact: "التواصل والموقع | الدمشقي، تصميم مفاهيمي", beforeAfter: "تحسينات الموقع | الدمشقي، تصميم مفاهيمي", notFound: "الصفحة غير موجودة | الدمشقي" },
       brandTagline: "القائمة والطلبات",
     nav: {
       home: "الرئيسية",
@@ -9,12 +12,14 @@ const translations = {
       cart: "السلة",
       orderWhatsApp: "اطلب عبر واتساب",
       switchLanguage: "Switch to English",
+      switchToShort: "EN",
       openMenu: "فتح القائمة",
       closeMenu: "إغلاق القائمة",
+      mainNavigation: "التنقل الرئيسي",
     },
     home: {
       eyebrow: "الدمشقي · العاشر من رمضان",
-      title: "اكتشف قائمتنا واختر وجبتك بسهولة",
+      title: "تصفّح قائمة الدمشقي واختر وجبتك بسهولة",
       intro:
         "تصفّح الأصناف والأحجام، ثم راجع طلبك ورسالتك قبل فتح واتساب.",
       viewMenu: "تصفّح القائمة",
@@ -39,8 +44,12 @@ const translations = {
       resultCount: "عدد النتائج: {count}",
       noResults: "لا توجد أصناف تطابق البحث.",
       reset: "عرض كل الأصناف",
-      illustration: "صورة توضيحية",
       addToCart: "أضف {item}{size} إلى السلة بسعر {price} جنيهًا",
+      addedStatus: "أُضيف {item} إلى السلة",
+      addHint: "اضغط على الحجم لإضافته إلى السلة",
+      eyebrow: "الدمشقي · العاشر من رمضان",
+      heroImageAlt: "وجبة شاورما",
+      whatsappFallback: "تواصل عبر واتساب",
     },
     cart: {
       title: "سلة الطلبات",
@@ -65,6 +74,8 @@ const translations = {
       online: "الدفع الإلكتروني غير متاح حاليًا؛ يتطلب خادمًا وبوابة دفع.",
       whatsappHint: "ستُفتح رسالة جاهزة في واتساب لمراجعتها قبل الإرسال.",
       reviewOrder: "مراجعة الطلب في واتساب",
+      nameRequired: "يرجى إدخال الاسم.",
+      addressRequired: "يرجى إدخال عنوان التوصيل.",
     },
     contact: {
       title: "التواصل والموقع",
@@ -82,21 +93,18 @@ const translations = {
     beforeAfter: {
       title: "تحسين تجربة تصفح القائمة",
       intro:
-        "ثلاث مشكلات موثقة في تصفح القائمة، مع عرض التغييرات المنفذة لكل مشكلة.",
+        "{count} مشكلات موثقة في تصفح القائمة، مع عرض التغييرات المنفذة لكل مشكلة.",
       evidence: "الدليل",
       mobileEvidence: "عرض لقطة الشاشة على الهاتف",
       fullPage: "عرض لقطة الصفحة القديمة كاملة",
-      lighthouseTitle: "ملاحظة حول تقارير Lighthouse المرفقة",
-      lighthouseNote:
-        "التقارير المرفقة (5 نوفمبر 2026، خادم Vite المحلي): الأداء 60 على الحاسوب و44 على الهاتف، وسهولة الوصول وأفضل الممارسات 100، وتهيئة محركات البحث 92 في كليهما. جُمعت أثناء التطوير، لذلك لا تمثل أداء النسخة المبنية؛ يلزم قياسها بعد النشر.",
+      problemsHeading: "المشكلات المرصودة",
+      conceptDisclaimer: "هذا مشروع مفاهيمي مستقل غير تابع لمطعم الدمشقي، ولا يستقبل الطلبات نيابةً عنه.",
+      conceptBadge: "تصميم مفاهيمي",
       oldImage: "قبل",
       newImage: "بعد",
       sliderLabel: "حرّك للمقارنة بين الشكل السابق والحالي",
       sliderValue: "يظهر {percent}% من الصورة السابقة",
       sliderPlaceholder: "ستظهر صورة الصفحة الحالية هنا بعد تجهيزها.",
-    },
-    payment: {
-      cash: "الدفع عند الاستلام",
     },
     whatsapp: {
       greeting: "مرحبًا، أود الاستفسار عن القائمة.",
@@ -107,12 +115,13 @@ const translations = {
       customer: "الاسم:",
       address: "العنوان:",
       notes: "ملاحظات:",
-    },
-    common: {
-      count: "{count}",
+      demoNotice: "(طلب تجريبي من تصميم مفاهيمي مستقل، وليس طلبًا فعليًا)",
     },
   },
   en: {
+    lighthouse: { title: "Lighthouse comparison", caption: "Lighthouse results before and after", metric: "Metric", old: "Old", new: "New", device: "Device", sameDeviceNote: "Both measurements use the same device and Lighthouse mode.", metrics: { performance: "Performance", accessibility: "Accessibility", bestPractices: "Best Practices", seo: "SEO" } },
+    notFound: { title: "Page not found", text: "We could not find the page you requested.", home: "Return to home" },
+    pageTitles: { home: "Home | Al Demashqi concept", menu: "Menu | Al Demashqi concept", cart: "Cart | Al Demashqi concept", contact: "Contact | Al Demashqi concept", beforeAfter: "Improvements | Al Demashqi concept", notFound: "Page not found | Al Demashqi concept" },
     brandTagline: "Menu & orders",
     nav: {
       home: "Home",
@@ -122,8 +131,10 @@ const translations = {
       cart: "Cart",
       orderWhatsApp: "Order on WhatsApp",
       switchLanguage: "التبديل إلى العربية",
+      switchToShort: "ع",
       openMenu: "Open menu",
       closeMenu: "Close menu",
+      mainNavigation: "Main navigation",
     },
     home: {
       eyebrow: "Al Demashqi · 10th of Ramadan City",
@@ -152,8 +163,12 @@ const translations = {
       resultCount: "Results: {count}",
       noResults: "No menu items match your search.",
       reset: "Show all items",
-      illustration: "Illustrative photo",
       addToCart: "Add {item}{size} to cart for EGP {price}",
+      addedStatus: "Added {item} to cart",
+      addHint: "Select a size to add it to your cart",
+      eyebrow: "Al Demashqi · 10th of Ramadan City",
+      heroImageAlt: "Shawarma meal",
+      whatsappFallback: "Contact on WhatsApp",
     },
     cart: {
       title: "Your cart",
@@ -178,6 +193,8 @@ const translations = {
       online: "Online payment is unavailable; it requires a backend and payment provider.",
       whatsappHint: "A prepared WhatsApp message will open for your review before sending.",
       reviewOrder: "Review order on WhatsApp",
+      nameRequired: "Please enter your name.",
+      addressRequired: "Please enter a delivery address.",
     },
     contact: {
       title: "Contact & location",
@@ -194,21 +211,18 @@ const translations = {
     beforeAfter: {
       title: "A clearer menu browsing experience",
       intro:
-        "Three documented menu browsing problems, with the implemented change shown for each one.",
+        "{count} documented menu browsing problems, with the implemented change shown for each one.",
       evidence: "Evidence",
       mobileEvidence: "View the mobile screenshot",
       fullPage: "View the full screenshot of the previous page",
-      lighthouseTitle: "Note about the attached Lighthouse reports",
-      lighthouseNote:
-        "Attached reports (5 November 2026, local Vite server): Performance scored 60 on desktop and 44 on mobile; Accessibility and Best Practices scored 100, and SEO scored 92 on both. They were collected during development, so they do not represent the production build; measure again after deployment.",
+      problemsHeading: "Observed problems",
+      conceptDisclaimer: "This is an independent concept project, unaffiliated with Al Demashqi, and it does not accept orders on the restaurant’s behalf.",
+      conceptBadge: "Concept",
       oldImage: "Before",
       newImage: "After",
       sliderLabel: "Move to compare the previous and current design",
       sliderValue: "{percent}% of the previous image is visible",
       sliderPlaceholder: "The current page image will appear here when available.",
-    },
-    payment: {
-      cash: "Cash on delivery",
     },
     whatsapp: {
       greeting: "Hello, I would like to ask about the menu.",
@@ -219,9 +233,7 @@ const translations = {
       customer: "Name:",
       address: "Address:",
       notes: "Notes:",
-    },
-    common: {
-      count: "{count}",
+      demoNotice: "(Test order from an independent concept demo, not a real order)",
     },
   },
 };

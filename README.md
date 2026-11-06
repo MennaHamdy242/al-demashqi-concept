@@ -1,64 +1,97 @@
-# Al Demashqi — Menu and Ordering
+# Al Demashqi — independent concept redesign
 
-An independent frontend training project for browsing the Al Demashqi menu and preparing an order message. It is not the restaurant's official website and does not accept orders on the restaurant's behalf.
+## Concept disclaimer
 
-## What it does
+This frontend is an independent concept redesign for a training application. It is not affiliated with Al Demashqi, and it does not receive or place orders for the restaurant. Menu content and the logo belong to the restaurant and appear only in this concept demo.
 
-- Arabic-first, right-to-left experience with a global Arabic/English switch in the header.
-- Search across menu items and filter by category.
-- Select sizes, add items to a cart, adjust quantities, and review the total.
-- Prepare an order message for WhatsApp. The customer reviews and sends it themselves.
-- Link the restaurant address to Google Maps.
-- Show documented website issues alongside before/after comparisons.
-- Keep cash on delivery as the only active payment choice. Online payment stays disabled because there is no backend or payment provider; the site never asks for card details.
+## Problem
+
+The existing Al Demashqi menu is text-heavy and difficult to browse. Evidence in this repository documents five issues: four visible in screenshots (no food photos, horizontally scrollable categories, a long menu without quick section navigation, and delivery information only at the end) and one Lighthouse finding (missing meta description). This project explores ways to improve menu browsing; it does not claim that the restaurant has no website.
+
+## Solution and features
+
+Core: a before/after comparison slider for the original screenshot-backed redesigns and a list of all five documented problems. The Lighthouse-backed problem appears in the list without a slider because no before/after image pair exists for it.
+
+Supporting: menu categories, normalized Arabic search, prepared WhatsApp contact/order messages, responsive layout, and AR/EN language switching. Extras: cart and cash-on-delivery selection. The project has no backend and does not process a real order or online payment.
+
+## Links
+
+- Live demo: TODO(user)
+- Repository: TODO(user)
+- Video: TODO(user)
+
+## Tech stack
+
+React, Vite, React Router, and CSS. There are no extra runtime dependencies.
 
 ## Run locally
 
-Requires Node.js and npm.
+1. Install the existing dependencies with `npm install`.
+2. Copy `.env.example` to `.env.local`.
+3. Optionally set `VITE_WHATSAPP_NUMBER` to your own number in the environment file; leaving it blank is supported. Never use the restaurant's number. `VITE_` values are public in the built site.
+4. Run `npm run dev`.
 
-```bash
-npm install
-npm run dev
-```
+The WhatsApp message includes a test-order notice. Verify its behavior yourself before sharing a public deployment.
 
-Create a production build and run the linter:
+## Project structure
 
-```bash
-npm run build
-npm run lint
-```
+- `src/components/`: reusable navigation, menu cards, comparison slider, footer, and shared UI.
+- `src/pages/`: Home, Menu, Cart, Contact, Before/After, and NotFound routes.
+- `src/data/`: menu, translations, documented problems, and Lighthouse values.
+- `src/context/` and `src/providers/`: cart and language state.
+- `src/hooks/`: cart, language, and page-title hooks.
+- `src/utils/`: formatting, Arabic normalization, and WhatsApp message helpers.
+- `public/images/`: logo, category images, and comparison screenshots.
+- `docs/`: screenshot capture guide.
 
-## WhatsApp configuration
+## Decisions
 
-The number is read from `VITE_WHATSAPP_NUMBER`. For local testing, put a number in international format without `+`, spaces, or the leading national zero in an ignored `.env.local` file:
+- Data is separate from UI so menu values and translations can be reviewed independently.
+- There is no backend or payment processing because this is a frontend-only training demo. Online payment is unavailable; no fake card form is shown.
+- The cart persists only item IDs, size labels, keys, and quantities. Names and prices are derived from `src/data/menu.js` so stale stored prices do not override current menu data.
+- The menu contains four sample categories. Any menu content and prices shown are for demonstration and must be verified by the student before presenting.
+- The WhatsApp recipient comes from an environment variable, so no personal number is stored in the repository. It must be the student's own number or empty, never the restaurant's. Vite exposes `VITE_` values in public built assets.
+- Outgoing messages carry a notice that they are test messages and not real orders.
 
-```text
-VITE_WHATSAPP_NUMBER=201xxxxxxxxx
-```
+## Deliberately not built
 
-Do not commit personal phone numbers or set one in a public deployment without the owner's explicit approval. If the value is blank, WhatsApp opens with the prepared message and lets the user choose a recipient. Never use the restaurant's real number for this demo.
+No backend, database, login, order storage, real checkout, online payment, or restaurant order integration.
 
-## Menu and image notes
+## Accessibility and responsive notes
 
-Menu names and sample prices were transcribed from [eldemashqi.com](https://eldemashqi.com/); confirm them with the restaurant before presenting them as current business information. Menu photos are illustrative and are not confirmed photos of restaurant dishes.
+The app supports RTL Arabic and English, keyboard operation for navigation and sliders, visible focus styles, field-level checkout errors, reduced-motion preferences for existing interactions, and responsive menu/header layouts. Check narrow viewports and production routes before delivery.
 
-- Shawarma: [MeCooks image](https://www.mecooks.com/wp-content/uploads/2025/10/IMGL1460-min-1024x683.jpg).
-- Shawarma meals: [Piper Cooks — Chicken Shawarma Plate](https://www.pipercooks.com/chicken-shawarma-plate/).
-- Crepe: [Chelsea's Messy Apron image](https://www.chelseasmessyapron.com/wp-content/uploads/2019/05/Nutella-Crepes-ChelseasMessyApron-1200-3-500x500.jpg).
-- Chicken: provided by the project owner.
+## Lighthouse: old vs new
 
-The before screenshots document the existing public restaurant website. The `new-*` screenshots are earlier captures of this project and should be refreshed from the final deployment before presenting the comparison as final evidence.
+The saved report in `docs/LightHouse` measured the old site on desktop: Performance 75, Accessibility 100, Best Practices 100, and SEO 92. The new values remain empty until the deployed redesign is measured. The old site already scores well on accessibility and best practices, so the redesign's value is menu browsing UX and the missing meta description, not a general score jump.
 
-## Lighthouse notes
+Audits deliberately excluded from the problem list: `bf-cache` was attributed to memory pressure, not a confirmed site defect; `layout-shifts` and `render-blocking-insight` were treated as weak or negligible impact and are not claimed as problems.
 
-The attached desktop and mobile Lighthouse reports were collected against `http://localhost:5173/` while Vite's development server was running. Both included approximately 5.3 MB of development JavaScript and HMR files, so those performance scores do not describe the optimized production build. Re-run Lighthouse against the deployed production URL before comparing final scores.
+## Image credits
 
-The earlier mobile baseline for the existing restaurant site was Performance 83, Accessibility 100, Best Practices 100, and SEO 92. These values are kept separate from the local development reports.
+Add the real source and license for each image. Do not guess credits.
 
-## Project limits
+- `public/images/logo.png` — TODO(user): source and license.
+- `public/images/hero/chicken.jpg` — TODO(user): source and license.
+- `public/images/hero/crepes.jpg` — TODO(user): source and license.
+- `public/images/hero/shawarma-meals.webp` — TODO(user): source and license.
+- `public/images/hero/shawarma.webp` — TODO(user): source and license.
+- `public/images/before-after/first-page-mobile.png` — TODO(user): source and license.
+- `public/images/before-after/first-page.png` — TODO(user): source and license.
+- `public/images/before-after/full-site.png` — TODO(user): source and license.
+- `public/images/before-after/last-page-mobile.png` — TODO(user): source and license.
+- `public/images/before-after/last-page.png` — TODO(user): source and license.
+- `public/images/before-after/middle-page-mobile.png` — TODO(user): source and license.
+- `public/images/before-after/middle-page.png` — TODO(user): source and license.
+- `public/images/before-after/new-menu-card.png` — TODO(user): source and license.
+- `public/images/before-after/new-menu.png` — TODO(user): source and license.
+- `public/images/before-after/new-navbar-mobile.png` — TODO(user): source and license.
+- `public/images/before-after/new-navbar.png` — TODO(user): source and license.
 
-- There is no backend, database, account, or server-side order record.
-- Cart contents are stored in this browser only.
-- WhatsApp messages are prepared for review; the customer must send them.
-- Online payments are not implemented.
-- The public demo URL, production Lighthouse scores, and refreshed comparison screenshots still need final verification.
+## AI use — edit before submission
+
+TODO(user): Replace this paragraph with an honest description of which tools helped, what they changed, what you reviewed, and which parts you can explain independently.
+
+## Challenges
+
+TODO(user): Add the actual challenges and lessons learned in the submission video.

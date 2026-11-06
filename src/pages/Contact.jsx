@@ -2,10 +2,12 @@ import WhatsAppButton from "../components/WhatsAppButton";
 import useLanguage from "../hooks/useLanguage";
 import { translations } from "../data/translations";
 import "./Contact.css";
+import usePageTitle from "../hooks/usePageTitle";
 
 function Contact() {
   const { language } = useLanguage();
   const t = translations[language].contact;
+  usePageTitle("contact");
   const mapQuery =
     language === "ar"
       ? "شارع صيدناوي، العاشر من رمضان، مصر"

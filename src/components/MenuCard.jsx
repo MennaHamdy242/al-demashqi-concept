@@ -1,28 +1,22 @@
+import { useEffect, useRef, useState } from "react";
 import "./MenuCard.css";
 import useCart from "../hooks/useCart";
 import useLanguage from "../hooks/useLanguage";
 import { getSizeLabel, interpolate, translations } from "../data/translations";
 import { formatPrice } from "../utils/formatters";
 
-function MenuCard({ item, categoryName, category }) {
+function MenuCard({ item }) {
   const { addItem } = useCart();
   const { language } = useLanguage();
   const t = translations[language].menu;
   const itemName = language === "ar" ? item.nameAr : item.name;
-  const categoryLabel = language === "ar" ? category.nameAr : category.name;
+  const [addedSize, setAddedSize] = useState(null);
+  const [status, setStatus] = useState("");
+  const timerRef = useRef(null);
+  useEffect(() => () => window.clearTimeout(timerRef.current), []);
 
   return (
     <article className="menu-card">
-      <img
-        className="menu-card-image"
-        src={category.heroImage}
-        alt={`${t.illustration}: ${categoryLabel}`}
-        width={category.imageWidth}
-        height={category.imageHeight}
-        loading="lazy"
-        decoding="async"
-      />
-      {categoryName && <p className="menu-card-category">{categoryName}</p>}
       <h3 className="menu-card-name" lang={language}>
         {itemName}
       </h3>
@@ -33,22 +27,28 @@ function MenuCard({ item, categoryName, category }) {
             <button
               type="button"
               className="size-pill"
-              onClick={() => addItem(item, size)}
-              aria-label={interpolate(t.addToCart, {
+              onClick={() => {
+                addItem(item, size);
+                setAddedSize(size.label ?? "single");
+                setStatus(interpolate(t.addedStatus, { item: itemName }));
+                window.clearTimeout(timerRef.current);
+                timerRef.current = window.setTimeout(() => { setAddedSize(null); setStatus(""); }, 1200);
+              }}
+              data-added={(size.label ?? "single") === addedSize || undefined}
+              aria-label={`${size.label ? `${getSizeLabel(size.label, language)} · ` : ""}${formatPrice(size.price, language, true)}. ${interpolate(t.addToCart, {
                 item: itemName,
                 size: size.label
                   ? `${language === "ar" ? "، " : " · "}${getSizeLabel(size.label, language)}`
                   : "",
-                price: new Intl.NumberFormat(
-                  language === "ar" ? "ar-EG" : "en-EG"
-                ).format(size.price),
-              })}
+                price: formatPrice(size.price, language, true),
+              })}`}
             >
               {size.label && (
                 <span className="size-label" lang={language}>
                   {getSizeLabel(size.label, language)}
                 </span>
               )}
+              <span aria-hidden="true" className="size-add-icon">{(size.label ?? "single") === addedSize ? "✓" : "+"}</span>
               <span className="size-price" lang={language}>
                 {formatPrice(size.price, language, true)}
               </span>
@@ -56,6 +56,7 @@ function MenuCard({ item, categoryName, category }) {
           </li>
         ))}
       </ul>
+      <span className="visually-hidden" role="status">{status}</span>
     </article>
   );
 }

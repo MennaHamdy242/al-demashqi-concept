@@ -1,0 +1,10 @@
+.site-footer {
+  max-width: 1240px;
+  margin-inline: auto;
+  padding: 20px clamp(16px, 3vw, 36px);
+  border-block-start: 1px solid rgb(81 6 13 / 12%);
+  color: #55483e;
+  font-size: 0.9rem;
+  line-height: 1.7;
+  text-align: center;
+}
