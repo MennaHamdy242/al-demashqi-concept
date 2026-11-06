@@ -59,6 +59,7 @@ function CartProvider({ children }) {
         {
           key,
           itemId: item.id,
+          name: item.name,
           nameAr: item.nameAr,
           sizeLabel,
           price: size.price,

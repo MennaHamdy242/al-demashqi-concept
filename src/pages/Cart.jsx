@@ -1,14 +1,15 @@
 import { Link } from "react-router-dom";
 import useCart from "../hooks/useCart";
+import useLanguage from "../hooks/useLanguage";
 import { buildOrderUrl } from "../utils/whatsapp";
+import { getSizeLabel, translations } from "../data/translations";
+import { formatPrice } from "../utils/formatters";
 import "./Cart.css";
-
-function formatPrice(amount) {
-  return `${amount.toLocaleString("ar-EG")} جنيه`;
-}
 
 function Cart() {
   const { items, cartCount, changeQuantity, removeItem } = useCart();
+  const { language } = useLanguage();
+  const t = translations[language].cart;
   const total = items.reduce((sum, item) => sum + item.price * item.quantity, 0);
 
   const handleSubmit = (event) => {
@@ -20,35 +21,36 @@ function Cart() {
       customerName: formData.get("customerName"),
       address: formData.get("address"),
       notes: formData.get("notes"),
+      language,
     });
     window.open(orderUrl, "_blank", "noopener,noreferrer");
   };
 
   return (
     <main className="cart-page">
-      <h1>سلة الطلب</h1>
+      <h1>{t.title}</h1>
 
       {items.length === 0 ? (
         <section className="cart-empty" aria-live="polite">
-          <p>السلة فاضية دلوقتي.</p>
+          <p>{t.empty}</p>
           <Link to="/menu" className="cart-primary-link">
-            اختاري أصناف من المنيو
+            {t.browseMenu}
           </Link>
         </section>
       ) : (
         <>
-          <section className="cart-items" aria-label="الأصناف في السلة">
+          <section className="cart-items" aria-label={t.itemsLabel}>
             {items.map((item) => (
               <article className="cart-item" key={item.key}>
                 <div className="cart-item__details">
-                  <h2>{item.nameAr}</h2>
+                  <h2>{language === "ar" ? item.nameAr : item.name || item.nameAr}</h2>
                   {item.sizeLabel && (
-                    <p dir="ltr" lang="en">
-                      {item.sizeLabel}
+                    <p lang={language}>
+                      {getSizeLabel(item.sizeLabel, language)}
                     </p>
                   )}
                   <p className="cart-item__unit-price">
-                    {formatPrice(item.price)} للواحد
+                    {formatPrice(item.price, language)} {t.unitPrice}
                   </p>
                 </div>
 
@@ -56,20 +58,28 @@ function Cart() {
                   <div
                     className="cart-quantity"
                     role="group"
-                    aria-label={`كمية ${item.nameAr}`}
+                    aria-label={`${t.quantity}: ${language === "ar" ? item.nameAr : item.name || item.nameAr}`}
                   >
                     <button
                       type="button"
                       onClick={() => changeQuantity(item.key, -1)}
-                      aria-label={`تقليل كمية ${item.nameAr}`}
+                      aria-label={t.decrease.replace(
+                        "{item}",
+                        language === "ar" ? item.nameAr : item.name || item.nameAr
+                      )}
                     >
                       −
                     </button>
-                    <output aria-live="polite">{item.quantity}</output>
+                    <output aria-live="polite">
+                      {item.quantity.toLocaleString(language === "ar" ? "ar-EG" : "en-EG")}
+                    </output>
                     <button
                       type="button"
                       onClick={() => changeQuantity(item.key, 1)}
-                      aria-label={`زيادة كمية ${item.nameAr}`}
+                      aria-label={t.increase.replace(
+                        "{item}",
+                        language === "ar" ? item.nameAr : item.name || item.nameAr
+                      )}
                     >
                       +
                     </button>
@@ -79,31 +89,33 @@ function Cart() {
                     className="cart-remove"
                     onClick={() => removeItem(item.key)}
                   >
-                    حذف
+                    {t.remove}
                   </button>
                 </div>
 
                 <strong className="cart-item__total">
-                  {formatPrice(item.price * item.quantity)}
+                  {formatPrice(item.price * item.quantity, language)}
                 </strong>
               </article>
             ))}
           </section>
 
           <section className="cart-checkout" aria-labelledby="checkout-title">
-            <h2 id="checkout-title">بيانات الطلب</h2>
-            <p>عدد القطع: {cartCount}</p>
+            <h2 id="checkout-title">{t.details}</h2>
+            <p>
+              {t.count}: {cartCount.toLocaleString(language === "ar" ? "ar-EG" : "en-EG")}
+            </p>
             <p className="cart-total">
-              الإجمالي: <strong>{formatPrice(total)}</strong>
+              {t.total}: <strong>{formatPrice(total, language)}</strong>
             </p>
 
             <form className="checkout-form" onSubmit={handleSubmit}>
               <label>
-                الاسم
+                {t.name}
                 <input name="customerName" autoComplete="name" required />
               </label>
               <label>
-                العنوان بالتفصيل
+                {t.address}
                 <textarea
                   name="address"
                   autoComplete="street-address"
@@ -112,12 +124,12 @@ function Cart() {
                 />
               </label>
               <label>
-                ملاحظات إضافية <span>(اختياري)</span>
+                {t.notes} <span>({t.optional})</span>
                 <textarea name="notes" rows="2" />
               </label>
 
               <fieldset className="payment-options">
-                <legend>طريقة الدفع</legend>
+                <legend>{t.payment}</legend>
                 <label>
                   <input
                     type="radio"
@@ -125,7 +137,7 @@ function Cart() {
                     value="cash-on-delivery"
                     defaultChecked
                   />
-                  الدفع عند الاستلام
+                  {t.cash}
                 </label>
                 <label className="payment-disabled">
                   <input
@@ -134,15 +146,15 @@ function Cart() {
                     value="online"
                     disabled
                   />
-                  دفع أونلاين — قريبًا، يحتاج backend وبوابة دفع
+                  {t.online}
                 </label>
               </fieldset>
 
               <p className="checkout-hint">
-                هتتفتح رسالة جاهزة في واتساب لمراجعتها قبل الإرسال.
+                {t.whatsappHint}
               </p>
               <button type="submit" className="checkout-submit">
-                مراجعة الطلب على واتساب
+                {t.reviewOrder}
               </button>
             </form>
           </section>

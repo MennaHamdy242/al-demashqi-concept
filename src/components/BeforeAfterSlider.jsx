@@ -6,6 +6,11 @@ function BeforeAfterSlider({
   afterSrc,
   beforeAlt,
   afterAlt,
+  beforeLabel = "قبل",
+  afterLabel = "بعد",
+  sliderLabel = "حرّك للمقارنة بين الشكل السابق والحالي",
+  sliderValue = "يظهر {percent}% من الصورة السابقة",
+  placeholderText = "ستظهر صورة الصفحة الحالية هنا بعد تجهيزها.",
   aspectRatio = "16 / 10",
   maxWidth = "100%",
 }) {
@@ -43,13 +48,17 @@ function BeforeAfterSlider({
           />
         ) : (
           <div className="ba-slider__placeholder" aria-hidden="true">
-            صورة التصميم الجديد هتتضاف بعد ما يستقر الشكل النهائي
+            {placeholderText}
           </div>
         )}
       </div>
 
-      <span className="ba-slider__label ba-slider__label--before">قبل</span>
-      <span className="ba-slider__label ba-slider__label--after">بعد</span>
+      <span className="ba-slider__label ba-slider__label--before">
+        {beforeLabel}
+      </span>
+      <span className="ba-slider__label ba-slider__label--after">
+        {afterLabel}
+      </span>
 
       <input
         className="ba-slider__input"
@@ -58,8 +67,8 @@ function BeforeAfterSlider({
         max="100"
         value={position}
         onChange={(event) => setPosition(Number(event.target.value))}
-        aria-label="اسحبي للمقارنة بين التصميم القديم والجديد"
-        aria-valuetext={`${position}% من الصورة القديمة ظاهرة`}
+        aria-label={sliderLabel}
+        aria-valuetext={sliderValue.replace("{percent}", position)}
       />
 
       <div

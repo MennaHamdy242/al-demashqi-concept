@@ -1,0 +1,257 @@
+const translations = {
+  ar: {
+      brandTagline: "القائمة والطلبات",
+    nav: {
+      home: "الرئيسية",
+      beforeAfter: "تحسينات الموقع",
+      menu: "القائمة",
+      contact: "التواصل والموقع",
+      cart: "السلة",
+      orderWhatsApp: "اطلب عبر واتساب",
+      switchLanguage: "Switch to English",
+      openMenu: "فتح القائمة",
+      closeMenu: "إغلاق القائمة",
+    },
+    home: {
+      eyebrow: "الدمشقي · العاشر من رمضان",
+      title: "اكتشف قائمتنا واختر وجبتك بسهولة",
+      intro:
+        "تصفّح الأصناف والأحجام، ثم راجع طلبك ورسالتك قبل فتح واتساب.",
+      viewMenu: "تصفّح القائمة",
+      compare: "استكشف تحسينات الموقع",
+      discoverTitle: "اعثر على ما تبحث عنه",
+      discoverText: "انتقل بين الأقسام أو ابحث عن صنف مباشرةً.",
+      orderTitle: "راجع طلبك بوضوح",
+      orderText: "اختر الحجم والكمية، وتحقق من الإجمالي قبل المتابعة.",
+      messageTitle: "أرسل الطلب عبر واتساب",
+      messageText: "جهّز رسالة منظمة وراجعها بنفسك قبل الإرسال.",
+      featuresLabel: "خطوات التصفح والطلب",
+      disclaimer:
+        "هذه تجربة مستقلة غير تابعة للمطعم؛ رسائل واتساب تُفتح للمراجعة قبل الإرسال.",
+    },
+    menu: {
+      title: "قائمة الطعام",
+      all: "كل الأصناف",
+      categoriesLabel: "أقسام القائمة",
+      searchLabel: "ابحث في القائمة",
+      searchPlaceholder: "مثال: شاورما، دجاج، كريب",
+      clearSearch: "مسح البحث",
+      resultCount: "عدد النتائج: {count}",
+      noResults: "لا توجد أصناف تطابق البحث.",
+      reset: "عرض كل الأصناف",
+      illustration: "صورة توضيحية",
+      addToCart: "أضف {item}{size} إلى السلة بسعر {price} جنيهًا",
+    },
+    cart: {
+      title: "سلة الطلبات",
+      empty: "السلة فارغة حاليًا.",
+      browseMenu: "تصفّح القائمة لإضافة أصناف",
+      itemsLabel: "الأصناف في السلة",
+      quantity: "الكمية",
+      unitPrice: "للقطعة الواحدة",
+      increase: "زيادة كمية {item}",
+      decrease: "تقليل كمية {item}",
+      remove: "حذف",
+      details: "بيانات الطلب",
+      count: "عدد القطع",
+      total: "الإجمالي",
+      pound: "جنيهًا مصريًا",
+      name: "الاسم",
+      address: "عنوان التوصيل بالتفصيل",
+      notes: "ملاحظات إضافية",
+      optional: "اختياري",
+      payment: "طريقة الدفع",
+      cash: "الدفع عند الاستلام",
+      online: "الدفع الإلكتروني غير متاح حاليًا؛ يتطلب خادمًا وبوابة دفع.",
+      whatsappHint: "ستُفتح رسالة جاهزة في واتساب لمراجعتها قبل الإرسال.",
+      reviewOrder: "مراجعة الطلب في واتساب",
+    },
+    contact: {
+      title: "التواصل والموقع",
+      intro:
+        "تحقّق من العنوان أو جهّز رسالة استفسار لمراجعتها في واتساب.",
+      address: "العنوان",
+      street: "شارع صيدناوي، مدينة العاشر من رمضان، مصر",
+      map: "افتح الموقع في خرائط Google",
+      whatsapp: "واتساب",
+      whatsappText: "افتح رسالة استفسار جاهزة وراجعها قبل الإرسال.",
+      whatsappButton: "فتح واتساب",
+      disclaimer:
+        "هذه تجربة مستقلة غير تابعة للمطعم، ولا تستقبل الطلبات نيابةً عنه.",
+    },
+    beforeAfter: {
+      title: "تحسين تجربة تصفح القائمة",
+      intro:
+        "ثلاث مشكلات موثقة في تصفح القائمة، مع عرض التغييرات المنفذة لكل مشكلة.",
+      evidence: "الدليل",
+      mobileEvidence: "عرض لقطة الشاشة على الهاتف",
+      fullPage: "عرض لقطة الصفحة القديمة كاملة",
+      lighthouseTitle: "ملاحظة حول تقارير Lighthouse المرفقة",
+      lighthouseNote:
+        "التقارير المرفقة (5 نوفمبر 2026، خادم Vite المحلي): الأداء 60 على الحاسوب و44 على الهاتف، وسهولة الوصول وأفضل الممارسات 100، وتهيئة محركات البحث 92 في كليهما. جُمعت أثناء التطوير، لذلك لا تمثل أداء النسخة المبنية؛ يلزم قياسها بعد النشر.",
+      oldImage: "قبل",
+      newImage: "بعد",
+      sliderLabel: "حرّك للمقارنة بين الشكل السابق والحالي",
+      sliderValue: "يظهر {percent}% من الصورة السابقة",
+      sliderPlaceholder: "ستظهر صورة الصفحة الحالية هنا بعد تجهيزها.",
+    },
+    payment: {
+      cash: "الدفع عند الاستلام",
+    },
+    whatsapp: {
+      greeting: "مرحبًا، أود الاستفسار عن القائمة.",
+      orderTitle: "طلب من قائمة الدمشقي",
+      items: "الأصناف:",
+      total: "الإجمالي:",
+      payment: "طريقة الدفع: عند الاستلام",
+      customer: "الاسم:",
+      address: "العنوان:",
+      notes: "ملاحظات:",
+    },
+    common: {
+      count: "{count}",
+    },
+  },
+  en: {
+    brandTagline: "Menu & orders",
+    nav: {
+      home: "Home",
+      beforeAfter: "Improvements",
+      menu: "Menu",
+      contact: "Contact & location",
+      cart: "Cart",
+      orderWhatsApp: "Order on WhatsApp",
+      switchLanguage: "التبديل إلى العربية",
+      openMenu: "Open menu",
+      closeMenu: "Close menu",
+    },
+    home: {
+      eyebrow: "Al Demashqi · 10th of Ramadan City",
+      title: "Explore the menu and choose your meal",
+      intro:
+        "Browse dishes and sizes, then review your order and message before opening WhatsApp.",
+      viewMenu: "Browse the menu",
+      compare: "Explore site improvements",
+      discoverTitle: "Find what you want",
+      discoverText: "Browse categories or search for a dish directly.",
+      orderTitle: "Review your order clearly",
+      orderText: "Choose sizes and quantities, then check the total before continuing.",
+      messageTitle: "Send your order on WhatsApp",
+      messageText: "Prepare an organized message and review it before sending.",
+      featuresLabel: "Browse and order",
+      disclaimer:
+        "This independent demo is not affiliated with the restaurant. WhatsApp messages open for review before sending.",
+    },
+    menu: {
+      title: "Menu",
+      all: "All items",
+      categoriesLabel: "Menu categories",
+      searchLabel: "Search the menu",
+      searchPlaceholder: "For example: shawarma, chicken, crepe",
+      clearSearch: "Clear search",
+      resultCount: "Results: {count}",
+      noResults: "No menu items match your search.",
+      reset: "Show all items",
+      illustration: "Illustrative photo",
+      addToCart: "Add {item}{size} to cart for EGP {price}",
+    },
+    cart: {
+      title: "Your cart",
+      empty: "Your cart is empty.",
+      browseMenu: "Browse the menu to add items",
+      itemsLabel: "Items in cart",
+      quantity: "Quantity",
+      unitPrice: "each",
+      increase: "Increase {item} quantity",
+      decrease: "Decrease {item} quantity",
+      remove: "Remove",
+      details: "Order details",
+      count: "Items",
+      total: "Total",
+      pound: "EGP",
+      name: "Name",
+      address: "Delivery address",
+      notes: "Additional notes",
+      optional: "optional",
+      payment: "Payment method",
+      cash: "Cash on delivery",
+      online: "Online payment is unavailable; it requires a backend and payment provider.",
+      whatsappHint: "A prepared WhatsApp message will open for your review before sending.",
+      reviewOrder: "Review order on WhatsApp",
+    },
+    contact: {
+      title: "Contact & location",
+      intro: "Check the address or prepare an inquiry to review in WhatsApp.",
+      address: "Address",
+      street: "Saidnawi Street, 10th of Ramadan City, Egypt",
+      map: "Open location in Google Maps",
+      whatsapp: "WhatsApp",
+      whatsappText: "Open a prepared inquiry and review it before sending.",
+      whatsappButton: "Open WhatsApp",
+      disclaimer:
+        "This independent demo is not affiliated with the restaurant and does not place orders on its behalf.",
+    },
+    beforeAfter: {
+      title: "A clearer menu browsing experience",
+      intro:
+        "Three documented menu browsing problems, with the implemented change shown for each one.",
+      evidence: "Evidence",
+      mobileEvidence: "View the mobile screenshot",
+      fullPage: "View the full screenshot of the previous page",
+      lighthouseTitle: "Note about the attached Lighthouse reports",
+      lighthouseNote:
+        "Attached reports (5 November 2026, local Vite server): Performance scored 60 on desktop and 44 on mobile; Accessibility and Best Practices scored 100, and SEO scored 92 on both. They were collected during development, so they do not represent the production build; measure again after deployment.",
+      oldImage: "Before",
+      newImage: "After",
+      sliderLabel: "Move to compare the previous and current design",
+      sliderValue: "{percent}% of the previous image is visible",
+      sliderPlaceholder: "The current page image will appear here when available.",
+    },
+    payment: {
+      cash: "Cash on delivery",
+    },
+    whatsapp: {
+      greeting: "Hello, I would like to ask about the menu.",
+      orderTitle: "Order from Al Demashqi menu",
+      items: "Items:",
+      total: "Total:",
+      payment: "Payment: cash on delivery",
+      customer: "Name:",
+      address: "Address:",
+      notes: "Notes:",
+    },
+    common: {
+      count: "{count}",
+    },
+  },
+};
+
+function getSizeLabel(label, language) {
+  if (!label || language === "en") return label;
+
+  const labels = {
+    Small: "صغير",
+    Large: "كبير",
+    Fino: "فينو",
+    "Quarter kg": "ربع كيلوجرام",
+    "Half kg": "نصف كيلوجرام",
+    "1 kg": "كيلوجرام واحد",
+    Single: "فردي",
+    Double: "مزدوج",
+    "Quarter (leg)": "ربع دجاجة · ورك",
+    "Quarter (breast)": "ربع دجاجة · صدر",
+    "Half chicken": "نصف دجاجة",
+    "Full chicken": "دجاجة كاملة",
+  };
+
+  return labels[label] ?? label;
+}
+
+function interpolate(template, values) {
+  return Object.entries(values).reduce(
+    (text, [key, value]) => text.replaceAll(`{${key}}`, value),
+    template
+  );
+}
+
+export { getSizeLabel, interpolate, translations };

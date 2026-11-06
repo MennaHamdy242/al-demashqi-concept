@@ -1,27 +1,68 @@
 :root {
-  /* Al Demashqi color palette */
-  /* --color-maroon: #7A1F1F;       أساسي: headers, logo background */
-   --color-maroon: #51060d;
-  --color-cream: #FBF3E3;        /* خلفية الموقع */
-  --color-gold: #C9A227;         /* تفاصيل وأزرار */
-  --color-text: #2B2B2B;         /* نص غامق مش أسود خالص */
-  --color-white: #FFFFFF;
-
-  /* Spacing (هنستخدمها بدل ما نكتب أرقام عشوائية كل مرة) */
+  color-scheme: light;
+  --color-maroon: #51060d;
+  --color-cream: #fbf3e3;
+  --color-gold: #c9a227;
+  --color-text: #2b2b2b;
+  --color-white: #ffffff;
   --space-sm: 8px;
   --space-md: 16px;
   --space-lg: 32px;
-
   font-family: "Segoe UI", Tahoma, Arial, sans-serif;
-}
-
-body {
-  margin: 0;
-  background-color: var(--color-cream);
-  color: var(--color-text);
-    font-family: "Tahoma", "Segoe UI", Arial, sans-serif;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 * {
   box-sizing: border-box;
+}
+
+html {
+  min-width: 320px;
+  background: var(--color-cream);
+  scroll-behavior: smooth;
+  scrollbar-gutter: stable;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+  margin: 0;
+  background: var(--color-cream);
+  color: var(--color-text);
+  font-family: "Segoe UI", Tahoma, Arial, sans-serif;
+  line-height: 1.55;
+}
+
+button,
+input,
+textarea {
+  font: inherit;
+}
+
+button,
+a {
+  -webkit-tap-highlight-color: transparent;
+}
+
+img {
+  max-width: 100%;
+}
+
+::selection {
+  background: var(--color-gold);
+  color: var(--color-maroon);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

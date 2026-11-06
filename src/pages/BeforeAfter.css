@@ -1,49 +1,98 @@
 .ba-page {
-  max-width: 960px;
+  max-width: 1180px;
   margin-inline: auto;
-  padding: var(--space-lg) var(--space-md);
+  padding: clamp(28px, 5vw, 56px) clamp(16px, 4vw, 40px);
+}
+
+.ba-page__heading {
+  max-width: 760px;
+  margin-block-end: 26px;
+}
+
+.ba-eyebrow {
+  margin: 0 0 6px;
+  color: #6e5a4c;
+  font-size: 0.9rem;
+  font-weight: 750;
+}
+
+.ba-page h1 {
+  margin: 0;
+  color: var(--color-maroon);
+  font-size: clamp(2rem, 4vw, 2.8rem);
 }
 
 .ba-page__intro {
-  margin-block: var(--space-sm) var(--space-md);
-  line-height: 1.6;
+  max-width: 700px;
+  margin-block: 10px 0;
+  color: #55483e;
+  line-height: 1.8;
 }
 
 .ba-comparisons {
   display: grid;
-  gap: var(--space-lg);
+  gap: 20px;
 }
 
 .ba-comparison {
-  padding: var(--space-md);
-  border: 1px solid #e8dcc0;
-  border-radius: 12px;
+  padding: clamp(16px, 3vw, 28px);
+  border: 1px solid rgb(81 6 13 / 12%);
+  border-radius: 20px;
   background: var(--color-white);
-  box-shadow: 0 2px 8px rgb(0 0 0 / 6%);
+  box-shadow: 0 10px 28px rgb(81 6 13 / 6%);
+}
+
+.ba-comparison__copy {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  margin-block-end: 16px;
+}
+
+.ba-comparison__number {
+  display: grid;
+  width: 42px;
+  height: 42px;
+  flex: 0 0 42px;
+  place-items: center;
+  border-radius: 14px;
+  background: var(--color-maroon);
+  color: var(--color-white);
+  font-size: 0.9rem;
+  font-weight: 850;
 }
 
 .ba-comparison h2 {
-  margin: 0 0 var(--space-sm);
+  margin: 0;
   color: var(--color-maroon);
-  font-size: 1.25rem;
+  font-size: clamp(1.2rem, 2.8vw, 1.5rem);
+  line-height: 1.4;
 }
 
 .ba-comparison__description {
-  margin: 0 0 var(--space-md);
-  line-height: 1.7;
+  margin: 6px 0 0;
+  color: #55483e;
+  line-height: 1.75;
 }
 
 .ba-comparison__evidence {
-  margin: var(--space-sm) 0 0;
-  color: var(--color-maroon);
+  margin: 12px 0 0;
+  color: #58473c;
   font-size: 0.9rem;
 }
 
-.ba-comparison__full-page {
-  display: inline-block;
-  margin-block-start: var(--space-sm);
+.ba-comparison__evidence strong {
   color: var(--color-maroon);
-  font-weight: 700;
+}
+
+.ba-comparison__full-page {
+  display: inline-flex;
+  min-height: 44px;
+  align-items: center;
+  margin-block-start: 4px;
+  color: var(--color-maroon);
+  font-weight: 750;
+  text-underline-offset: 4px;
 }
 
 .ba-comparison__full-page:focus-visible {
@@ -51,85 +100,21 @@
   outline-offset: 3px;
 }
 
-.ba-page__section {
-  margin-block-start: var(--space-lg);
-}
-
-.ba-page__table {
-  width: 100%;
-  max-width: 420px;
-  margin-block: var(--space-sm);
-  border-collapse: collapse;
-}
-
-.ba-page__table th,
-.ba-page__table td {
-  padding: var(--space-sm);
-  border-block-end: 1px solid var(--color-maroon);
-  text-align: start;
-}
-
 .ba-page__note {
-  font-size: 0.9rem;
-  line-height: 1.6;
-}
-
-.ba-page__problems {
-  display: grid;
-  gap: var(--space-md);
-  margin: var(--space-md) 0 0;
-  padding: 0;
-  list-style: none;
-}
-
-.ba-problem {
-  display: flex;
-  align-items: flex-start;
-  gap: var(--space-md);
-  padding: var(--space-md);
-  border: 1px solid var(--color-maroon);
+  margin-block-start: 28px;
+  padding: 18px 20px;
+  border-inline-start: 4px solid var(--color-gold);
   border-radius: 12px;
   background: var(--color-white);
+  color: #55483e;
+  font-size: 0.92rem;
+  line-height: 1.7;
 }
 
-.ba-problem__num {
-  flex: 0 0 36px;
-  display: grid;
-  place-items: center;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  background: var(--color-maroon);
-  color: var(--color-cream);
-  font-weight: 700;
-}
-
-.ba-problem h3 {
-  margin: 0 0 4px;
+.ba-page__note strong {
   color: var(--color-maroon);
 }
 
-.ba-problem p {
-  margin: 0 0 var(--space-sm);
-  line-height: 1.6;
-}
-
-.ba-problem__evidence {
-  display: inline-block;
-  padding: 2px 10px;
-  border-radius: 999px;
-  background: var(--color-gold);
-  color: var(--color-maroon);
-  font-size: 0.85rem;
-  font-weight: 700;
-}
-
-@media (min-width: 700px) {
-  .ba-comparison {
-    padding: var(--space-md) var(--space-lg);
-  }
-
-  .ba-page__problems {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
+.ba-page__note p {
+  margin: 6px 0 0;
 }

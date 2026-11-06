@@ -1,71 +1,35 @@
-// src/data/problems.js
-
-export const lighthouseBefore = [
-  { metric: 'Performance', score: 83 },
-  { metric: 'Accessibility', score: 100 },
-  { metric: 'Best Practices', score: 100 },
-  { metric: 'SEO', score: 92 },
-]
-
 export const problems = [
   {
     id: 1,
-    title: 'مفيش صور للأكل',
-    description: 'الصفحة نص وأسعار بس، فالزبون مش بيشوف الأكل قبل ما يطلب.',
-    evidence: 'Screenshot',
+    title: "لا توجد صور للأطعمة",
+    titleEn: "No food photos",
+    description:
+      "تعرض الصفحة أسماء الأصناف وأسعارها فقط، فلا يستطيع العميل معاينة الوجبات قبل الاختيار.",
+    descriptionEn:
+      "The page lists item names and prices only, so customers cannot preview dishes before choosing.",
+    evidence: "لقطة الشاشة الأولى على الهاتف: قائمة نصية بلا صور",
+    evidenceEn: "First mobile screenshot: text-only menu with no food photos",
   },
   {
     id: 2,
-    title: 'شريط الأقسام محتاج scroll جانبي',
-    description: 'الأقسام في صف أفقي لازم تسحبيه يمين وشمال، على الديسكتوب والموبايل.',
-    evidence: 'Screenshot',
+    title: "التنقل بين الأقسام يتطلب تمريرًا أفقيًا",
+    titleEn: "Category navigation requires horizontal scrolling",
+    description:
+      "تظهر الأقسام في شريط أفقي يتجاوز عرض الشاشة، ويحتاج العميل إلى سحبه للوصول إلى بقية الخيارات.",
+    descriptionEn:
+      "Categories extend beyond the viewport in a horizontal strip, requiring customers to scroll sideways to reach the rest.",
+    evidence: "لقطة الشاشة الأولى على الحاسوب والهاتف: شريط قابل للسحب أفقيًا",
+    evidenceEn: "First desktop and mobile screenshots: horizontally scrollable category bar",
   },
   {
     id: 3,
-    title: 'صفحة طويلة جدًا بدون تنقل سريع',
-    description: 'أكتر من 15 قسم في عمود واحد، ومفيش طريقة توصلي لقسم معين بسرعة.',
-    evidence: 'Screenshot',
+    title: "قائمة طويلة بلا انتقال مباشر بين الأقسام",
+    titleEn: "A long menu without quick section navigation",
+    description:
+      "تتتابع أكثر من 15 مجموعة في عمود واحد، ولا توجد وسيلة سريعة للانتقال إلى المجموعة المطلوبة.",
+    descriptionEn:
+      "More than 15 groups appear in one long column, with no quick way to jump to a specific section.",
+    evidence: "لقطة الصفحة الكاملة: أكثر من 15 مجموعة متتابعة",
+    evidenceEn: "Full-page screenshot: more than 15 consecutive groups",
   },
-  {
-    id: 4,
-    title: 'أرقام التوصيل في آخر الصفحة',
-    description: 'الزبون لازم ينزل الصفحة كلها عشان يلاقي رقم يطلب منه.',
-    evidence: 'Screenshot',
-  },
-  {
-    id: 5,
-    title: 'مفيش زرار واتساب مباشر',
-    description: 'مع إن أغلب الطلبات بتتم على واتساب، مفيش زرار بيفتح المحادثة.',
-    evidence: 'Screenshot',
-  },
-  {
-    id: 6,
-    title: 'كل الأصناف شكلها واحد',
-    description: 'الأصناف كلها pills بسيطة متشابهة، فمفيش حاجة بتميّز صنف عن التاني.',
-    evidence: 'Screenshot',
-  },
-  {
-    id: 7,
-    title: 'الصفحة بتتحرك وهي بتحمّل',
-    description: 'العناصر بتتزحزح أثناء التحميل، وده بيخلي الضغط على الزرار الغلط أسهل.',
-    evidence: 'Lighthouse · CLS = 0.54 (ضعيف)',
-  },
-  {
-    id: 8,
-    title: 'أول محتوى بيظهر ببطء متوسط',
-    description: 'مؤشر First Contentful Paint في المنطقة المتوسطة وليس الجيدة.',
-    evidence: 'Lighthouse · FCP score = 0.73',
-  },
-  {
-    id: 9,
-    title: 'مفيش meta description',
-    description: 'محركات البحث مش لاقية وصف للصفحة تعرضه في النتايج.',
-    evidence: 'Lighthouse · SEO = 92',
-  },
-  {
-    id: 10,
-    title: 'العنوان نص بدون رابط خرائط',
-    description: 'العنوان مكتوب في آخر الصفحة كنص عادي، ومفيش رابط يفتح الموقع على الخريطة.',
-    evidence: 'Screenshot',
-  },
-]
+];

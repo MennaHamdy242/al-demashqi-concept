@@ -1,7 +1,5 @@
-// Add the demo owner's international phone number here before recording.
-// Leave the country code in place and omit spaces, +, and leading zeroes.
-export const WHATSAPP_NUMBER = "";
-export const WHATSAPP_GREETING = "مرحبًا، أريد الاستفسار عن المنيو.";
+// A local Vite environment value keeps personal numbers out of the repository.
+export const WHATSAPP_NUMBER = import.meta.env.VITE_WHATSAPP_NUMBER ?? "";
 
 export function getWhatsAppUrl(message) {
   const number = WHATSAPP_NUMBER.replace(/\D/g, "");

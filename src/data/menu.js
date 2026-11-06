@@ -1,12 +1,11 @@
 // src/data/menu.js
-// All item names and prices copied from eldemashqi.com
-// This is a concept redesign demo — not the official restaurant site
+// Menu names and prices are sample data transcribed from eldemashqi.com.
 
 export const categories = [
   {
     id: "shawarma",
     name: "Shawarma",
-    nameAr: "شاورما",
+    nameAr: "الشاورما",
     heroImage: "/images/hero/shawarma.webp",
     imageWidth: 1024,
     imageHeight: 683,
@@ -24,17 +23,17 @@ export const categories = [
   {
     id: "chicken",
     name: "Chicken",
-    nameAr: "فراخ",
-    heroImage: "/images/hero/chicken.jpg",
-    imageWidth: 1200,
-    imageHeight: 800,
-    note: "All meals include: rice + fries + garlic sauce + tahini + bread + pickles. Broasted comes with coleslaw instead of tahini.",
-    noteAr: "جميع الوجبات تشمل: رز + بطاطس + تومية + طحينة + عيش + مخلل. البروستد: كلوسلو بدل الطحينة.",
+    nameAr: "الدجاج",
+    heroImage: "/images/hero/chicken.jfif",
+    imageWidth: 664,
+    imageHeight: 462,
+    note: "All meals include rice, fries, garlic sauce, tahini, bread, and pickles. Broasted chicken comes with coleslaw instead of tahini.",
+    noteAr: "تشمل جميع الوجبات الأرز والبطاطس والثومية والطحينة والخبز والمخلل. يُقدَّم الدجاج البروستد مع سلطة الملفوف بدلًا من الطحينة.",
   },
   {
     id: "crepes",
     name: "Crepes",
-    nameAr: "كريب",
+    nameAr: "الكريب",
     heroImage: "/images/hero/crepes.jpg",
     imageWidth: 500,
     imageHeight: 500,
@@ -66,14 +65,14 @@ export const menuItems = [
     id: "shawarma-3",
     categoryId: "shawarma",
     name: "Shawarma Extra (Cheese & Mushroom)",
-    nameAr: "شاورما اكسترا (إضافة جبنة ومشروم)",
+    nameAr: "شاورما إضافية (جبن وفطر)",
     sizes: [{ label: "Large", price: 115 }],
   },
   {
     id: "shawarma-4",
     categoryId: "shawarma",
     name: "Shawarma Sayeb",
-    nameAr: "شاورما سايب",
+    nameAr: "شاورما بالوزن",
     sizes: [
       { label: "Quarter kg", price: 155 },
       { label: "Half kg", price: 280 },
@@ -86,35 +85,35 @@ export const menuItems = [
     id: "meal-1",
     categoryId: "shawarma-meals",
     name: "Shawarma Arabi Meal",
-    nameAr: "وجبة شاورما عربي",
+    nameAr: "وجبة شاورما عربية",
     sizes: [{ label: null, price: 130 }],
   },
   {
     id: "meal-2",
     categoryId: "shawarma-meals",
     name: "Shawarma Arabi Meal (Double)",
-    nameAr: "وجبة شاورما عربي دبل",
+    nameAr: "وجبة شاورما عربية مزدوجة",
     sizes: [{ label: null, price: 180 }],
   },
   {
     id: "meal-3",
     categoryId: "shawarma-meals",
     name: "Shawarma Fatteh",
-    nameAr: "فتة شاورما",
+    nameAr: "فتّة شاورما",
     sizes: [{ label: null, price: 125 }],
   },
   {
     id: "meal-4",
     categoryId: "shawarma-meals",
     name: "Shawarma Fatteh (Double)",
-    nameAr: "فتة شاورما دبل",
+    nameAr: "فتّة شاورما مزدوجة",
     sizes: [{ label: null, price: 155 }],
   },
   {
     id: "meal-5",
     categoryId: "shawarma-meals",
     name: "Shawarma Arabi Meal Extra",
-    nameAr: "وجبة شاورما عربي اكسترا",
+    nameAr: "وجبة شاورما عربية إضافية",
     sizes: [
       { label: "Single", price: 150 },
       { label: "Double", price: 200 },
@@ -131,7 +130,7 @@ export const menuItems = [
     id: "meal-7",
     categoryId: "shawarma-meals",
     name: "Maria Shawarma Meal Extra",
-    nameAr: "وجبة ماريا شاورما اكسترا",
+    nameAr: "وجبة ماريا شاورما إضافية",
     sizes: [{ label: null, price: 185 }],
   },
 
@@ -140,7 +139,7 @@ export const menuItems = [
     id: "chicken-1",
     categoryId: "chicken",
     name: "Grilled Chicken",
-    nameAr: "فراخ شواية",
+    nameAr: "دجاج مشوي",
     sizes: [
       { label: "Quarter (leg)", price: 120 },
       { label: "Quarter (breast)", price: 130 },
@@ -152,7 +151,7 @@ export const menuItems = [
     id: "chicken-2",
     categoryId: "chicken",
     name: "Broasted",
-    nameAr: "بروستد",
+    nameAr: "دجاج بروستد",
     sizes: [
       { label: "Quarter (leg)", price: 125 },
       { label: "Quarter (breast)", price: 130 },
@@ -164,7 +163,7 @@ export const menuItems = [
     id: "chicken-3",
     categoryId: "chicken",
     name: "Charcoal Grilled Chicken",
-    nameAr: "فراخ مشوية فحم",
+    nameAr: "دجاج مشوي على الفحم",
     sizes: [
       { label: "Quarter (leg)", price: 125 },
       { label: "Quarter (breast)", price: 130 },
@@ -178,7 +177,7 @@ export const menuItems = [
     id: "crepe-1",
     categoryId: "crepes",
     name: "Super Shawarma Crepe",
-    nameAr: "سوبر شاورما",
+    nameAr: "كريب شاورما سوبر",
     sizes: [
       { label: "Small", price: 115 },
       { label: "Large", price: 150 },
@@ -198,7 +197,7 @@ export const menuItems = [
     id: "crepe-3",
     categoryId: "crepes",
     name: "Burger Crepe",
-    nameAr: "برجر",
+    nameAr: "كريب برغر",
     sizes: [
       { label: "Small", price: 100 },
       { label: "Large", price: 120 },
@@ -208,14 +207,14 @@ export const menuItems = [
     id: "crepe-4",
     categoryId: "crepes",
     name: "Nutella Crepe",
-    nameAr: "نوتيلا",
+    nameAr: "كريب نوتيلا",
     sizes: [{ label: null, price: 75 }],
   },
   {
     id: "crepe-5",
     categoryId: "crepes",
     name: "El Demashqi Crepe (Shawarma + Panee + Strips)",
-    nameAr: "الدمشقي (شاورما + بانية + ستريبس)",
+    nameAr: "كريب الدمشقي (شاورما + بانيه + شرائح دجاج)",
     sizes: [
       { label: "Small", price: 150 },
       { label: "Large", price: 165 },
@@ -225,7 +224,7 @@ export const menuItems = [
     id: "crepe-6",
     categoryId: "crepes",
     name: "Mix Grill Chicken Crepe (Panee + Strips + Shish)",
-    nameAr: "مكس جريل فراخ (بانية + ستريبس + شيش)",
+    nameAr: "كريب مشكل الدجاج (بانيه + شرائح دجاج + شيش طاووق)",
     sizes: [
       { label: "Small", price: 150 },
       { label: "Large", price: 165 },

@@ -1,46 +1,61 @@
 import { Link } from "react-router-dom";
+import useLanguage from "../hooks/useLanguage";
+import { translations } from "../data/translations";
 import "./Home.css";
 
 function Home() {
+  const { language } = useLanguage();
+  const t = translations[language].home;
+
   return (
     <main className="home-page">
       <section className="home-hero" aria-labelledby="home-title">
-        <p className="home-eyebrow">مشروع إعادة تصميم مستقل</p>
-        <h1 id="home-title">الدمشقي — المنيو والطلب بشكل أوضح</h1>
-        <p className="home-intro">
-          concept redesign لموقع مطعم الدمشقي في العاشر من رمضان: تصفحي المنيو،
-          اختاري الحجم، وجهزي طلبك للمراجعة على واتساب.
-        </p>
-        <div className="home-actions">
-          <Link to="/before-after" className="home-action home-action--primary">
-            شوفي المقارنة
-          </Link>
-          <Link to="/menu" className="home-action home-action--secondary">
-            تصفحي المنيو
-          </Link>
+        <div className="home-hero__copy">
+          <p className="home-eyebrow">{t.eyebrow}</p>
+          <h1 id="home-title">{t.title}</h1>
+          <p className="home-intro">{t.intro}</p>
+          <div className="home-actions">
+            <Link to="/menu" className="home-action home-action--primary">
+              {t.viewMenu}
+            </Link>
+            <Link to="/before-after" className="home-action home-action--secondary">
+              {t.compare}
+            </Link>
+          </div>
         </div>
+        <img
+          className="home-hero__image"
+          src="/images/hero/shawarma.webp"
+          alt={language === "ar" ? "صورة توضيحية لوجبة شاورما" : "Illustrative shawarma meal"}
+          width="1024"
+          height="683"
+          fetchPriority="high"
+        />
       </section>
 
-      <section className="home-points" aria-label="مميزات التصميم المقترح">
+      <section className="home-points" aria-label={t.featuresLabel}>
         <article>
-          <h2>مقارنة موثقة</h2>
-          <p>شوفي الأدلة والمشاكل اللي اتحددت في الموقع الحالي.</p>
-          <Link to="/before-after">صفحة قبل / بعد</Link>
+          <span className="home-point-number">01</span>
+          <h2>{t.discoverTitle}</h2>
+          <p>{t.discoverText}</p>
+          <Link to="/menu">{t.viewMenu}</Link>
         </article>
         <article>
-          <h2>اختيار أسهل</h2>
-          <p>فلتر الأقسام، اختاري الحجم، وضيفي الأصناف للسلة.</p>
-          <Link to="/menu">افتحي المنيو</Link>
+          <span className="home-point-number">02</span>
+          <h2>{t.orderTitle}</h2>
+          <p>{t.orderText}</p>
+          <Link to="/menu">{t.viewMenu}</Link>
         </article>
         <article>
-          <h2>طلب واضح</h2>
-          <p>راجعي الأصناف والإجمالي وجهزي رسالة الطلب في واتساب.</p>
-          <Link to="/cart">روحي للسلة</Link>
+          <span className="home-point-number">03</span>
+          <h2>{t.messageTitle}</h2>
+          <p>{t.messageText}</p>
+          <Link to="/cart">{translations[language].nav.cart}</Link>
         </article>
       </section>
 
       <p className="home-disclaimer">
-        ده concept redesign مستقل للتدريب، مش موقع رسمي تابع للمطعم.
+        {t.disclaimer}
       </p>
     </main>
   );
