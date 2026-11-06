@@ -16,8 +16,8 @@ Supporting: menu categories, normalized Arabic search, prepared WhatsApp contact
 
 ## Links
 
-- Live demo: TODO(user)
-- Repository: TODO(user)
+- Live demo: https://al-demashqi-concept.vercel.app/
+- Repository: https://github.com/MennaHamdy242/al-demashqi-concept
 - Video: TODO(user)
 
 ## Tech stack
@@ -63,7 +63,7 @@ The app supports RTL Arabic and English, keyboard operation for navigation and s
 
 ## Lighthouse: old vs new
 
-The saved report in `docs/LightHouse` measured the old site on desktop: Performance 75, Accessibility 100, Best Practices 100, and SEO 92. The new values remain empty until the deployed redesign is measured. The old site already scores well on accessibility and best practices, so the redesign's value is menu browsing UX and the missing meta description, not a general score jump.
+The saved report in `docs/LightHouse` measured the old site on desktop: Performance 75, Accessibility 100, Best Practices 100, and SEO 92. The new deployed menu report, dated 6 November 2026, measured desktop Performance 100, Accessibility 100, Best Practices 100, and SEO 100. Both reports used Lighthouse's simulate mode. The old site already scores well on accessibility and best practices, so the redesign's value is menu browsing UX and the missing meta description, not a general score jump.
 
 Audits deliberately excluded from the problem list: `bf-cache` was attributed to memory pressure, not a confirmed site defect; `layout-shifts` and `render-blocking-insight` were treated as weak or negligible impact and are not claimed as problems.
 

@@ -9,13 +9,13 @@ const lighthouse = {
     seo: 92,
   },
   new: {
-    url: null, // TODO(user): Measure the deployed URL.
-    date: null,
+    url: "https://al-demashqi-concept.vercel.app/menu",
+    date: "2026-11-06",
     device: "desktop",
-    performance: null,
-    accessibility: null,
-    bestPractices: null,
-    seo: null,
+    performance: 100,
+    accessibility: 100,
+    bestPractices: 100,
+    seo: 100,
   },
 };
 
