@@ -6,19 +6,23 @@ This frontend is an independent concept redesign for a training application. It 
 
 ## Problem
 
-The existing Al Demashqi menu is text-heavy and difficult to browse. Evidence in this repository documents five issues: four visible in screenshots (no food photos, horizontally scrollable categories, a long menu without quick section navigation, and delivery information only at the end) and one Lighthouse finding (missing meta description). This project explores ways to improve menu browsing; it does not claim that the restaurant has no website.
+The existing Al Demashqi menu website is text-heavy and difficult to browse. This repository documents five issues: four visible in screenshots (no food photos, horizontally scrollable categories, a long menu without quick section navigation, and delivery information only at the end) and one Lighthouse finding (missing meta description). This project explores ways to improve menu browsing; it does not claim that the restaurant has no website.
 
 ## Solution and features
 
-Core: a before/after comparison slider for the original screenshot-backed redesigns and a list of all five documented problems. The Lighthouse-backed problem appears in the list without a slider because no before/after image pair exists for it.
+**Core:** a before/after comparison slider (three comparisons backed by screenshots) and a list of all five documented problems. The Lighthouse-backed problem appears in the list without a slider because no before/after image pair exists for it.
 
-Supporting: menu categories, normalized Arabic search, prepared WhatsApp contact/order messages, responsive layout, and AR/EN language switching. Extras: cart and cash-on-delivery selection. The project has no backend and does not process a real order or online payment.
+**Supporting:** menu with category filter and search (with Arabic letter normalization), a prepared WhatsApp contact/order message, and a responsive layout.
+
+**Extras:** cart, cash-on-delivery selection, and Arabic/English switching.
+
+The project has no backend and does not process a real order or online payment.
 
 ## Links
 
 - Live demo: https://al-demashqi-concept.vercel.app/
 - Repository: https://github.com/MennaHamdy242/al-demashqi-concept
-- Video: TODO(user)
+- Video: ADD_VIDEO_LINK_HERE
 
 ## Tech stack
 
@@ -26,72 +30,69 @@ React, Vite, React Router, and CSS. There are no extra runtime dependencies.
 
 ## Run locally
 
-1. Install the existing dependencies with `npm install`.
+1. Install dependencies with `npm install`.
 2. Copy `.env.example` to `.env.local`.
-3. Optionally set `VITE_WHATSAPP_NUMBER` to your own number in the environment file; leaving it blank is supported. Never use the restaurant's number. `VITE_` values are public in the built site.
+3. Optionally set `VITE_WHATSAPP_NUMBER` to your own number (digits only, international format). Leaving it blank is supported. Never use the restaurant's number. `VITE_` values are public in the built site.
 4. Run `npm run dev`.
 
-The WhatsApp message includes a test-order notice. Verify its behavior yourself before sharing a public deployment.
+WhatsApp messages include a test-order notice.
 
 ## Project structure
 
-- `src/components/`: reusable navigation, menu cards, comparison slider, footer, and shared UI.
+- `src/components/`: navigation, menu cards, comparison slider, footer, and shared UI.
 - `src/pages/`: Home, Menu, Cart, Contact, Before/After, and NotFound routes.
 - `src/data/`: menu, translations, documented problems, and Lighthouse values.
 - `src/context/` and `src/providers/`: cart and language state.
 - `src/hooks/`: cart, language, and page-title hooks.
 - `src/utils/`: formatting, Arabic normalization, and WhatsApp message helpers.
 - `public/images/`: logo, category images, and comparison screenshots.
-- `docs/`: screenshot capture guide.
+- `docs/`: screenshot guide and the saved Lighthouse report of the old site.
 
 ## Decisions
 
 - Data is separate from UI so menu values and translations can be reviewed independently.
 - There is no backend or payment processing because this is a frontend-only training demo. Online payment is unavailable; no fake card form is shown.
-- The cart persists only item IDs, size labels, keys, and quantities. Names and prices are derived from `src/data/menu.js` so stale stored prices do not override current menu data.
-- The menu contains four sample categories. Any menu content and prices shown are for demonstration and must be verified by the student before presenting.
-- The WhatsApp recipient comes from an environment variable, so no personal number is stored in the repository. It must be the student's own number or empty, never the restaurant's. Vite exposes `VITE_` values in public built assets.
+- The cart persists only item IDs, size labels, keys, and quantities. Names and prices are derived from `src/data/menu.js`, so stale stored prices cannot override current menu data.
+- The menu contains four sample categories only (Shawarma, Shawarma meals, Chicken, Crepes). Items and prices are sample data copied from eldemashqi.com and may be out of date.
+- The WhatsApp recipient comes from an environment variable, so no personal number is stored in the repository. It is the developer's own number or empty, never the restaurant's. Vite exposes `VITE_` values in the public build.
 - Outgoing messages carry a notice that they are test messages and not real orders.
 
 ## Deliberately not built
 
 No backend, database, login, order storage, real checkout, online payment, or restaurant order integration.
 
+## Possible next steps
+
+Ideas I would explore beyond this sample:
+
+- Opening hours with an "open now" label (frontend only).
+- Item options such as extra toppings or "no onions", included in the cart and the WhatsApp message (frontend only).
+- Order tracking and online payment (these need a backend, which I am still learning, so they are not faked here).
+
 ## Accessibility and responsive notes
 
-The app supports RTL Arabic and English, keyboard operation for navigation and sliders, visible focus styles, field-level checkout errors, reduced-motion preferences for existing interactions, and responsive menu/header layouts. Check narrow viewports and production routes before delivery.
+The app supports Arabic (RTL) and English, keyboard operation for navigation and sliders, visible focus styles, field-level checkout errors, reduced-motion preferences, and a responsive header and menu layout (the cart stays visible on mobile).
 
 ## Lighthouse: old vs new
 
-The saved report in `docs/LightHouse` measured the old site on desktop: Performance 75, Accessibility 100, Best Practices 100, and SEO 92. The new deployed menu report, dated 6 November 2026, measured desktop Performance 100, Accessibility 100, Best Practices 100, and SEO 100. Both reports used Lighthouse's simulate mode. The old site already scores well on accessibility and best practices, so the redesign's value is menu browsing UX and the missing meta description, not a general score jump.
+The saved report in `docs/LightHouse` measured the old site on desktop: Performance 75, Accessibility 100, Best Practices 100, SEO 92. The deployed concept site, measured on desktop on 6 November 2026, scored 100 in all four. Both reports used Lighthouse's simulate mode. The old site already scores well on accessibility and best practices, so the value of this redesign is menu browsing UX and the missing meta description, not a general score jump.
 
-Audits deliberately excluded from the problem list: `bf-cache` was attributed to memory pressure, not a confirmed site defect; `layout-shifts` and `render-blocking-insight` were treated as weak or negligible impact and are not claimed as problems.
+Audits deliberately excluded from the problem list: `bf-cache` was attributed to memory pressure, not a confirmed site defect; `layout-shifts` and `render-blocking-insight` had weak or negligible impact and are not claimed as problems.
 
 ## Image credits
 
-Add the real source and license for each image. Do not guess credits.
+- Before/after "before" images (`first-page`, `middle-page`, `last-page`, `full-site`, and their mobile versions) are my own screenshots of eldemashqi.com, used only to document the problems.
+- "After" images (`new-*`) are screenshots of this concept redesign.
+- The logo belongs to Al Demashqi and is used only in this concept demo.
+- Category photos in `public/images/hero/` come from free stock sources or the restaurant's public page, and are used only for this concept demo. I did not record the exact source of each photo.
 
-- `public/images/logo.png` — TODO(user): source and license.
-- `public/images/hero/chicken.jpg` — TODO(user): source and license.
-- `public/images/hero/crepes.jpg` — TODO(user): source and license.
-- `public/images/hero/shawarma-meals.webp` — TODO(user): source and license.
-- `public/images/hero/shawarma.webp` — TODO(user): source and license.
-- `public/images/before-after/first-page-mobile.png` — TODO(user): source and license.
-- `public/images/before-after/first-page.png` — TODO(user): source and license.
-- `public/images/before-after/full-site.png` — TODO(user): source and license.
-- `public/images/before-after/last-page-mobile.png` — TODO(user): source and license.
-- `public/images/before-after/last-page.png` — TODO(user): source and license.
-- `public/images/before-after/middle-page-mobile.png` — TODO(user): source and license.
-- `public/images/before-after/middle-page.png` — TODO(user): source and license.
-- `public/images/before-after/new-menu-card.png` — TODO(user): source and license.
-- `public/images/before-after/new-menu.png` — TODO(user): source and license.
-- `public/images/before-after/new-navbar-mobile.png` — TODO(user): source and license.
-- `public/images/before-after/new-navbar.png` — TODO(user): source and license.
+## AI use
 
-## AI use — edit before submission
-
-TODO(user): Replace this paragraph with an honest description of which tools helped, what they changed, what you reviewed, and which parts you can explain independently.
+I use AI tools (Claude, ChatGPT, and a coding assistant) almost daily. The idea, the choice of restaurant, the problems list, and the design decisions are mine. AI tools helped me write and fix code, review it, and find bugs. I read and tested the changes myself, and I can explain the main parts of the code, such as the before/after slider and the cart.
 
 ## Challenges
 
-TODO(user): Add the actual challenges and lessons learned in the submission video.
+- **File names:** my logo was `logo.PNG` while the code asked for `logo.png`. Windows did not care, but Vercel is case-sensitive. I now keep file names lowercase and search the code after every rename.
+- **Similar file names:** the before/after page has files with very similar names, and one wrong letter breaks things. This confused me more than once.
+- **Images:** stretching screenshots to fit looked wrong, so I show them in their original proportions.
+- **Scope:** I wanted the design to feel very different from the original, but because this is a sample of the existing site, I kept the scope small and focused on quality.
